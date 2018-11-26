@@ -89,45 +89,14 @@ public class VRTrackSetter : MonoBehaviour {
     }
 
     public void SetTracksOnAvatar(){
-        /*vrik.solver.spine.headTarget = head.choosenTracker.transform;
-        vrik.solver.rightArm.target = rightArm.choosenTracker.transform;
-        vrik.solver.leftArm.target = leftArm.choosenTracker.transform;
-        vrik.solver.spine.pelvisTarget = hip.choosenTracker.transform;
-        vrik.solver.rightLeg.target = rightFoot.choosenTracker.transform;
-        vrik.solver.leftLeg.target = leftFoot.choosenTracker.transform;*/
+
         int bodyPartsReadyCount = 0;
         for (int i = 0; i < bodyParts.Count; i++){
             if (bodyParts[i].trackReady) bodyPartsReadyCount++;
         }
+
         if(bodyPartsReadyCount == bodyParts.Count){
             //poner dummies correctos
-            /*for (int i = 0; i < bodyParts.Count; i++){
-                //for (int j = 0; j < bodyDummies.Count; j++){
-                if (bodyParts[i].choosenDummie.bodyPart != bodyParts[i].bodyPart)
-                {
-                    //Transform Parent = bodyParts[i].choosenDummie.transform.parent;
-                    //bodyParts[i].choosenDummie.transform.parent = null;
-                    //bodyParts[i].choosenDummie.transform.parent = null;
-                    for (int j = 0; j < bodyDummies.Count; j++)
-                    {
-                        if(bodyParts[i].bodyPart == bodyDummies[j].bodyPart)
-                        {
-                            Vector3 localPos = bodyDummies[j].transform.localPosition;
-                            bodyDummies[j].transform.parent = bodyParts[i].choosenDummie.transform.parent;
-                            bodyDummies[j].transform.localPosition = localPos;
-                            bodyParts[i].choosenDummie = bodyDummies[j];
-
-
-                        }
-                    }
-                }
-
-                //}
-            
-            }*/
-
-
-
             vrik.solver.spine.headTarget = bodyParts[(int)BODYPARTS.HEAD].choosenDummie.transform;
             //bodyDummies[(int)BODYPARTS.HEAD].bodyPart = BODYPARTS.HEAD;
             vrik.solver.leftArm.target = bodyParts[(int)BODYPARTS.LEFT_ARM].choosenDummie.transform;
@@ -140,7 +109,7 @@ public class VRTrackSetter : MonoBehaviour {
             //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
             vrik.solver.rightLeg.target = bodyParts[(int)BODYPARTS.RIGHT_LEG].choosenDummie.transform;
             //bodyDummies[(int)BODYPARTS.RIGHT_LEG].bodyPart = BODYPARTS.RIGHT_LEG;
-            Debug.Log("TRACKERS PAIRED");
+            Debug.Log("TRACKERS PAIRED " + bodyPartsReadyCount);
 
 
             vrik.enabled = true;
