@@ -31,6 +31,7 @@ public class BodyTrackSetter : MonoBehaviour {
             trackReady = true;
         }else if (trackedObjects.Length > 0){
             _currentColor = correctTrackerColor;
+            //Debug.Log("detecting correctly a traker. type: "+ bodyPart);
             trackReady = true;
         }else{
             _currentColor = missingTrackerColor;

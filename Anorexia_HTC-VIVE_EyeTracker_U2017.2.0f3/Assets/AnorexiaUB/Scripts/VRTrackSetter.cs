@@ -12,6 +12,9 @@ public class VRTrackSetter : MonoBehaviour {
     public float overlapRadius;
     public List<BodyTrackSetter> bodyParts;
     public List<BodyPartId> bodyDummies;
+    public List<GameObject> bodyTransforms;
+    public List<GameObject> htcSensors;
+
     /*
     public BodyTrackSetter head;
     public BodyTrackSetter leftArm;
@@ -89,37 +92,55 @@ public class VRTrackSetter : MonoBehaviour {
     }
 
     public void SetTracksOnAvatar(){
-
-        int bodyPartsReadyCount = 0;
-        for (int i = 0; i < bodyParts.Count; i++){
-            if (bodyParts[i].trackReady) bodyPartsReadyCount++;
-        }
-
-        if(bodyPartsReadyCount == bodyParts.Count){
-            //poner dummies correctos
-            vrik.solver.spine.headTarget = bodyParts[(int)BODYPARTS.HEAD].choosenDummie.transform;
-            //bodyDummies[(int)BODYPARTS.HEAD].bodyPart = BODYPARTS.HEAD;
-            vrik.solver.leftArm.target = bodyParts[(int)BODYPARTS.LEFT_ARM].choosenDummie.transform;
-           // bodyDummies[(int)BODYPARTS.LEFT_ARM].bodyPart = BODYPARTS.LEFT_ARM;
-            vrik.solver.rightArm.target = bodyParts[(int)BODYPARTS.RIGHT_ARM].choosenDummie.transform;
-           // bodyDummies[(int)BODYPARTS.RIGHT_ARM].bodyPart = BODYPARTS.RIGHT_ARM;
-            vrik.solver.spine.pelvisTarget = bodyParts[(int)BODYPARTS.HIP].choosenDummie.transform;
-            //bodyDummies[(int)BODYPARTS.HIP].bodyPart = BODYPARTS.HIP;
-            vrik.solver.leftLeg.target = bodyParts[(int)BODYPARTS.LEFT_LEG].choosenDummie.transform;
-            //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
-            vrik.solver.rightLeg.target = bodyParts[(int)BODYPARTS.RIGHT_LEG].choosenDummie.transform;
-            //bodyDummies[(int)BODYPARTS.RIGHT_LEG].bodyPart = BODYPARTS.RIGHT_LEG;
-            Debug.Log("TRACKERS PAIRED " + bodyPartsReadyCount);
-
-
-            vrik.enabled = true;
-            DestroyTrackSetters();
-        }
-        else
+        if (vrik == null)
         {
-            Debug.Log("RETRY PAIR THE TRACKERS");
+            Debug.Log("reference is not seted");
+            vrik = GetComponent<VRIK>();
         }
-  }
+        if (htcSensors[(int)BODYPARTS.HEAD].activeInHierarchy) vrik.solver.spine.headTarget = bodyTransforms[(int)BODYPARTS.HEAD].transform;
+        //bodyDummies[(int)BODYPARTS.HEAD].bodyPart = BODYPARTS.HEAD;
+        if (htcSensors[(int)BODYPARTS.LEFT_ARM].activeInHierarchy) vrik.solver.leftArm.target = bodyTransforms[(int)BODYPARTS.LEFT_ARM].transform;
+        // bodyDummies[(int)BODYPARTS.LEFT_ARM].bodyPart = BODYPARTS.LEFT_ARM;
+        if (htcSensors[(int)BODYPARTS.RIGHT_ARM].activeInHierarchy) vrik.solver.rightArm.target = bodyTransforms[(int)BODYPARTS.RIGHT_ARM].transform;
+        // bodyDummies[(int)BODYPARTS.RIGHT_ARM].bodyPart = BODYPARTS.RIGHT_ARM;
+        if (htcSensors[(int)BODYPARTS.HIP].activeInHierarchy) vrik.solver.spine.pelvisTarget = bodyTransforms[(int)BODYPARTS.HIP].transform;
+        //bodyDummies[(int)BODYPARTS.HIP].bodyPart = BODYPARTS.HIP;
+        if (htcSensors[(int)BODYPARTS.LEFT_LEG].activeInHierarchy) vrik.solver.leftLeg.target = bodyTransforms[(int)BODYPARTS.LEFT_LEG].transform;
+        //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
+        if (htcSensors[(int)BODYPARTS.RIGHT_LEG].activeInHierarchy) vrik.solver.rightLeg.target = bodyTransforms[(int)BODYPARTS.RIGHT_LEG].transform;
+
+        vrik.enabled = true;
+        //int bodyPartsReadyCount = 0;
+        //for (int i = 0; i < bodyParts.Count; i++){
+        //    if (bodyParts[i].trackReady) bodyPartsReadyCount++;
+        //}
+
+        //if(bodyPartsReadyCount == bodyParts.Count){
+        //    //poner dummies correctos
+        //    if(htcSensors[(int)BODYPARTS.HEAD] != null) vrik.solver.spine.headTarget = bodyTransforms[(int)BODYPARTS.HEAD];
+        //    //bodyDummies[(int)BODYPARTS.HEAD].bodyPart = BODYPARTS.HEAD;
+        //    if (htcSensors[(int)BODYPARTS.LEFT_ARM] != null) vrik.solver.leftArm.target = bodyTransforms[(int)BODYPARTS.LEFT_ARM];
+        //    // bodyDummies[(int)BODYPARTS.LEFT_ARM].bodyPart = BODYPARTS.LEFT_ARM;
+        //    if (htcSensors[(int)BODYPARTS.RIGHT_ARM] != null) vrik.solver.rightArm.target = bodyTransforms[(int)BODYPARTS.RIGHT_ARM];
+        //    // bodyDummies[(int)BODYPARTS.RIGHT_ARM].bodyPart = BODYPARTS.RIGHT_ARM;
+        //    if (htcSensors[(int)BODYPARTS.HIP] != null) vrik.solver.spine.pelvisTarget = bodyTransforms[(int)BODYPARTS.HIP];
+        //    //bodyDummies[(int)BODYPARTS.HIP].bodyPart = BODYPARTS.HIP;
+        //    if (htcSensors[(int)BODYPARTS.LEFT_LEG] != null) vrik.solver.leftLeg.target = bodyTransforms[(int)BODYPARTS.LEFT_LEG];
+        //    //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
+        //    if (htcSensors[(int)BODYPARTS.RIGHT_LEG] != null) vrik.solver.rightLeg.target = bodyTransforms[(int)BODYPARTS.RIGHT_LEG];
+        //    //bodyDummies[(int)BODYPARTS.RIGHT_LEG].bodyPart = BODYPARTS.RIGHT_LEG;
+
+        //    Debug.Log("TRACKERS PAIRED " + bodyPartsReadyCount);
+
+
+        //    vrik.enabled = true;
+        //    DestroyTrackSetters();
+        //}
+        //else
+        //{
+        //    Debug.Log("RETRY PAIR THE TRACKERS");
+        //}
+    }
 
     public void DestroyTrackSetters(){
         for (int i = 0; i < bodyParts.Count; i++){
