@@ -8,21 +8,11 @@ public class VRTrackSetter : MonoBehaviour {
 
     public SteamVR_ControllerManager controllerManager;
     private VRIK vrik;
-    public List<GameObject> orderedTracks;
     public float overlapRadius;
-    public List<BodyTrackSetter> bodyParts;
-    public List<BodyPartId> bodyDummies;
+
     public List<GameObject> bodyTransforms;
     public List<GameObject> htcSensors;
 
-    /*
-    public BodyTrackSetter head;
-    public BodyTrackSetter leftArm;
-    public BodyTrackSetter rightArm;
-    public BodyTrackSetter hip;
-    public BodyTrackSetter leftFoot;
-    public BodyTrackSetter rightFoot;
-    */
     public Color missingTrackerColor;
     public Color correctTrackerColor;
     public Color conflictTrackerColor;
@@ -109,45 +99,46 @@ public class VRTrackSetter : MonoBehaviour {
         //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
         if (htcSensors[(int)BODYPARTS.RIGHT_LEG].activeInHierarchy) vrik.solver.rightLeg.target = bodyTransforms[(int)BODYPARTS.RIGHT_LEG].transform;
 
-        vrik.enabled = true;
-        //int bodyPartsReadyCount = 0;
-        //for (int i = 0; i < bodyParts.Count; i++){
-        //    if (bodyParts[i].trackReady) bodyPartsReadyCount++;
-        //}
-
-        //if(bodyPartsReadyCount == bodyParts.Count){
-        //    //poner dummies correctos
-        //    if(htcSensors[(int)BODYPARTS.HEAD] != null) vrik.solver.spine.headTarget = bodyTransforms[(int)BODYPARTS.HEAD];
-        //    //bodyDummies[(int)BODYPARTS.HEAD].bodyPart = BODYPARTS.HEAD;
-        //    if (htcSensors[(int)BODYPARTS.LEFT_ARM] != null) vrik.solver.leftArm.target = bodyTransforms[(int)BODYPARTS.LEFT_ARM];
-        //    // bodyDummies[(int)BODYPARTS.LEFT_ARM].bodyPart = BODYPARTS.LEFT_ARM;
-        //    if (htcSensors[(int)BODYPARTS.RIGHT_ARM] != null) vrik.solver.rightArm.target = bodyTransforms[(int)BODYPARTS.RIGHT_ARM];
-        //    // bodyDummies[(int)BODYPARTS.RIGHT_ARM].bodyPart = BODYPARTS.RIGHT_ARM;
-        //    if (htcSensors[(int)BODYPARTS.HIP] != null) vrik.solver.spine.pelvisTarget = bodyTransforms[(int)BODYPARTS.HIP];
-        //    //bodyDummies[(int)BODYPARTS.HIP].bodyPart = BODYPARTS.HIP;
-        //    if (htcSensors[(int)BODYPARTS.LEFT_LEG] != null) vrik.solver.leftLeg.target = bodyTransforms[(int)BODYPARTS.LEFT_LEG];
-        //    //bodyDummies[(int)BODYPARTS.LEFT_LEG].bodyPart = BODYPARTS.LEFT_LEG;
-        //    if (htcSensors[(int)BODYPARTS.RIGHT_LEG] != null) vrik.solver.rightLeg.target = bodyTransforms[(int)BODYPARTS.RIGHT_LEG];
-        //    //bodyDummies[(int)BODYPARTS.RIGHT_LEG].bodyPart = BODYPARTS.RIGHT_LEG;
-
-        //    Debug.Log("TRACKERS PAIRED " + bodyPartsReadyCount);
-
-
-        //    vrik.enabled = true;
-        //    DestroyTrackSetters();
-        //}
-        //else
-        //{
-        //    Debug.Log("RETRY PAIR THE TRACKERS");
-        //}
-    }
-
-    public void DestroyTrackSetters(){
-        for (int i = 0; i < bodyParts.Count; i++){
-            Destroy(bodyParts[i].GetComponent<BodyTrackSetter>());
+        if(bodyTransforms[(int)BODYPARTS.RIGHT_LEG].transform.position.x < bodyTransforms[(int)BODYPARTS.LEFT_LEG].transform.position.x && 
+            htcSensors[(int)BODYPARTS.LEFT_LEG].activeInHierarchy &&
+            htcSensors[(int)BODYPARTS.RIGHT_LEG].activeInHierarchy)
+        {
+            SwipeTargetControllers(BODYPARTS.RIGHT_LEG, BODYPARTS.LEFT_LEG);
         }
-        bodyParts = null;
+
+        vrik.enabled = true;
+
     }
+
+    void SwipeTargetControllers(BODYPARTS firstIdPart, BODYPARTS secondIdPart)
+    {
+        Debug.Log("hi, we are your legs. Now we still swiped! please change our transform locations");
+        Vector3 rightPos = bodyTransforms[(int)firstIdPart].transform.position;
+        Vector3 leftPos = bodyTransforms[(int)secondIdPart].transform.position;
+        Quaternion rightRotation = bodyTransforms[(int)firstIdPart].transform.rotation;
+        Quaternion leftRotation = bodyTransforms[(int)secondIdPart].transform.rotation;
+
+        //bodyTransforms[(int)firstIdPart].transform.rotation = Quaternion.identity;
+        //bodyTransforms[(int)secondIdPart].transform.rotation = Quaternion.identity;
+        bodyTransforms[(int)firstIdPart].transform.rotation = leftRotation;
+        bodyTransforms[(int)secondIdPart].transform.rotation = rightRotation;
+
+        bodyTransforms[(int)firstIdPart].transform.SetParent(htcSensors[(int)secondIdPart].transform);
+        bodyTransforms[(int)secondIdPart].transform.SetParent(htcSensors[(int)firstIdPart].transform);
+
+        bodyTransforms[(int)firstIdPart].transform.position = leftPos;
+        bodyTransforms[(int)secondIdPart].transform.position = rightPos;
+
+        
+
+
+    }
+    //public void DestroyTrackSetters(){
+    //    for (int i = 0; i < bodyParts.Count; i++){
+    //        Destroy(bodyParts[i].GetComponent<BodyTrackSetter>());
+    //    }
+    //    bodyParts = null;
+    //}
 
     void OnDrawGizmos() { 
     /*  Gizmos.color = missingTrackerColor;
