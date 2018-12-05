@@ -9,6 +9,7 @@ public class IMCCalculator : MonoBehaviour {
     public InputField weightField;
     public InputField heightField;
     public InputField imcField;
+    public Slider heightSlider;
     private Color placeHolderInitialColor;
     public IMCData imcData;
     //public List<IMCData> data;
@@ -30,7 +31,12 @@ public class IMCCalculator : MonoBehaviour {
     public void CalculateIMC(){
         if (!CheckFields()) return;
         float weight = float.Parse(weightField.text);
-        float height = float.Parse(heightField.text);       
+        float height = float.Parse(heightField.text);
+        //set height model
+        Debug.Log("height is " + height);
+        heightSlider.value = Mathf.Clamp01(height/200);
+        Debug.Log("height relation is " + heightSlider.value);
+
         height /= 100;
         imcData.height = height;
         imcData.weight = weight;
