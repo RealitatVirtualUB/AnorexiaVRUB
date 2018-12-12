@@ -12,6 +12,7 @@ public class ModelRenderers : MonoBehaviour {
     public SkinnedMeshRenderer hair;
     public SkinnedMeshRenderer bonnet;
 
+    public TransformColliderController colliderSetter;
     private int gender;
     private float age = 100;
     private float height = 1;
@@ -54,6 +55,7 @@ public class ModelRenderers : MonoBehaviour {
     public void SetFat(Slider slider){
         fat = slider.value; 
         SetBlendShape(BlendShape.FAT, fat);
+        colliderSetter.SetColliderSize(fat/100);
     }
 
     public void SetThin(Slider slider){
