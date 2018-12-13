@@ -29,10 +29,25 @@ public class VisotactileDetector : MonoBehaviour {
         }
     }
 
+    void OnCollisionStart(Collision other)
+    {
+        touchingZones++;
+        this.transform.localPosition = other.transform.position;
+        Debug.Log("starting collision");
+    }
+
     void OnCollisionExit(Collision other)
     {
+        touchingZones--;
+        if (touchingZones <=0)
+        {
+            this.transform.localPosition = initSpherePos;
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //this.GetComponent<HingeJoint>().constantForce
+        }
         //this.transform.localPosition = initSpherePos;
         Debug.Log("ending collision");
     }
+   
 
 }
