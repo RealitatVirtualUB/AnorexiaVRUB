@@ -11,6 +11,7 @@ Shader "Custom/ColorInterestShader"{
 		_Pos("WorldPos", vector) = (0.0, 0.0, 0.0, 0.0)
 		_Dist("Distance", float) = 5.0
 		_SpecMap("specularMap", 2D) = "white" {}
+		_Tint("Tint", Color) = (1.0,1.0,1.0,1.0)
 		_MainTex("Texture", 2D) = "white" {}
 		_BumpMap("NormalMap", 2D) = "bump" {}
 		_BumpDepth("bumpDepth", Range(-2, 2)) = 1
@@ -80,6 +81,7 @@ Shader "Custom/ColorInterestShader"{
 			sampler2D _SpecMap;
 			float4 _AfectionColor;
 			float4 _RimColor;
+			float4 _Tint;
 			float _RimPower;
 			float _BumpDepth;
 			float _Dist;
@@ -103,7 +105,7 @@ Shader "Custom/ColorInterestShader"{
 				}
 
 				//Texture maps
-				float4 mainTex = tex2D(_MainTex, i.uv);
+				float4 mainTex = tex2D(_MainTex, i.uv) * _Tint;
 				float4 normalTex = tex2D(_BumpMap, i.uv);
 				float3 specularTex = tex2D(_SpecMap, i.uv).xyz;
 				//unpacknormal function
@@ -210,6 +212,7 @@ Shader "Custom/ColorInterestShader"{
 			sampler2D _SpecMap;
 			float4 _AfectionColor;
 			float4 _RimColor;
+			float4 _Tint;
 			float _RimPower;
 			float _BumpDepth;
 			float _Dist;
@@ -233,7 +236,7 @@ Shader "Custom/ColorInterestShader"{
 				}
 
 				//Texture maps
-				float4 mainTex = tex2D(_MainTex, i.uv);
+				float4 mainTex = tex2D(_MainTex, i.uv) * _Tint;
 				float4 normalTex = tex2D(_BumpMap, i.uv);
 				float3 specularTex = tex2D(_SpecMap, i.uv).xyz;
 				//unpacknormal function

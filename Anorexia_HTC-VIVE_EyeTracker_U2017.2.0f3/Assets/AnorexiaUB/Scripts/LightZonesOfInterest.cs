@@ -17,7 +17,8 @@ public class LightZonesOfInterest : MonoBehaviour {
        RIGHTUPPERLEG,
        RIGHTLOWERLEG,
        LEFTUPPERLEG,
-       LEFTLOWERLEG
+       LEFTLOWERLEG,
+       NONE
     }
 
     public List<InterestZone> zonesOfinterest;
@@ -34,7 +35,7 @@ public class LightZonesOfInterest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-        ChangeAffectionZone(0);
+        ChangeAffectionZone(11);
         SetIntensity();
 	}
 	
@@ -85,8 +86,9 @@ public class LightZonesOfInterest : MonoBehaviour {
         //es pot optimitzar si avans de setejar el valor, identifiquem quina es la part que es necesita canviar
         foreach(Material m in bodyMaterials)
         {
+            Vector3 newpos = Vector3.zero;
             //Vector3 newpos =zonesOfinterest[currentInterestZone].positionZone.InverseTransformPoint(zonesOfinterest[currentInterestZone].positionZone.position);
-            Vector3 newpos = zonesOfinterest[currentInterestZone].positionZone.position;
+            if (zonesOfinterest[currentInterestZone].positionZone != null)newpos = zonesOfinterest[currentInterestZone].positionZone.position;
             m.SetVector("_Pos", newpos);
             m.SetFloat("_Dist", currentIntensity);
         }
