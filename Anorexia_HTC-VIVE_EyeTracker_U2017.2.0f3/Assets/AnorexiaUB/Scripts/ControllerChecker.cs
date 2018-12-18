@@ -14,18 +14,18 @@ public class ControllerChecker : MonoBehaviour {
     public GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
     public EventSystem m_EventSystem;
+    public QuestionController qc;
+
+    public bool inputActivated = false;
+    private bool parseValues = false;
 
     void Awake(){
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
-
-    void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
-        TryController();
+        if (inputActivated) TakeInput();
 	}
 
     void TryController(){
@@ -50,5 +50,47 @@ public class ControllerChecker : MonoBehaviour {
         if (Controller.GetHairTriggerUp()){
             Debug.Log(" Trigger Release");
         }
+    }
+
+    void TakeInput()
+    {
+        #region trigger
+        //down
+        if (Controller.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            qc.EndQuestion();
+            Debug.Log("trigger down");
+        }
+        //up
+        if (Controller.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            //Debug.Log("trigger up");
+        }
+        //value
+        //Vector2 triggerValue = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger);
+        //Debug.Log("trigger value " + triggerValue);
+        #endregion
+
+        #region touchpad
+        //down
+        if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            //Debug.Log("Touchpad down");
+            parseValues = true;
+            Debug.Log("touchpad touch detected");
+        }
+        //up
+        if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            //Debug.Log("Touchpad up");
+            parseValues = false;
+            Debug.Log("ending touchs");
+        }
+
+        //value
+        Vector2 touchpadValue = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+        if (parseValues) qc.questionPanel.GetComponent<QuestionPanel>().MoveSlider(touchpadValue.x);
+        //Debug.Log("Touchpad value " + touchpadValue);
+        #endregion
     }
 }

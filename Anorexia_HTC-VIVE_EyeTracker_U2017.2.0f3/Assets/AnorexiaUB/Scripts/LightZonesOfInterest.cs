@@ -32,6 +32,8 @@ public class LightZonesOfInterest : MonoBehaviour {
 
     int currentInterestZone = 0;
     float currentIntensity = 0;
+    private float desiredIntensity = 0;
+    private bool parseIntensity = false;
 
 	// Use this for initialization
 	void Start() {
@@ -79,6 +81,11 @@ public class LightZonesOfInterest : MonoBehaviour {
     public void ChangeIntensity()
     {
         currentIntensity = Mathf.Lerp(0, zonesOfinterest[currentInterestZone].maxIntensityOfInterest, sliderRef.value);
+    }
+    
+    public void ChangeIntensitySlider(float value)
+    {
+        sliderRef.value = value;
     }
 
     private void ChangeWorldPosMaterial()
