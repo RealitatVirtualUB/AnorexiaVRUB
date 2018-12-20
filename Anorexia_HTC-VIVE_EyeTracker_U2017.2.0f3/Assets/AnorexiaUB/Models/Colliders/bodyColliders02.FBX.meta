@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: dd5bd68297d72b844a0ae2fe2b8edafe
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Collider_LeftArm_Fat
+    100004: Collider_LeftArm_Mid
+    100006: Collider_LeftArm_Min
+    100008: Collider_LeftLeg_Fat
+    100010: Collider_LeftLeg_Mid
+    100012: Collider_LeftLeg_Min
+    100014: Collider_LeftLowArm_Fat
+    100016: Collider_LeftLowArm_Mid
+    100018: Collider_LeftLowArm_Min
+    100020: Collider_RightArm_Fat
+    100022: Collider_RightArm_Mid
+    100024: Collider_RightArm_Min
+    100026: Collider_RightLeg_Fat
+    100028: Collider_RightLeg_Mid
+    100030: Collider_RightLeg_Min
+    100032: Collider_RightLowArm_Fat
+    100034: Collider_RightLowArm_Mid
+    100036: Collider_RightLowArm_Min
+    100038: Collider_Stomach_Fat
+    100040: Collider_Stomach_Mid
+    100042: Collider_Stomach_Min
+    100044: Colliders_Hip_Fat
+    100046: Colliders_Hip_Mid
+    100048: Colliders_Hip_Min
+    400000: //RootNode
+    400002: Collider_LeftArm_Fat
+    400004: Collider_LeftArm_Mid
+    400006: Collider_LeftArm_Min
+    400008: Collider_LeftLeg_Fat
+    400010: Collider_LeftLeg_Mid
+    400012: Collider_LeftLeg_Min
+    400014: Collider_LeftLowArm_Fat
+    400016: Collider_LeftLowArm_Mid
+    400018: Collider_LeftLowArm_Min
+    400020: Collider_RightArm_Fat
+    400022: Collider_RightArm_Mid
+    400024: Collider_RightArm_Min
+    400026: Collider_RightLeg_Fat
+    400028: Collider_RightLeg_Mid
+    400030: Collider_RightLeg_Min
+    400032: Collider_RightLowArm_Fat
+    400034: Collider_RightLowArm_Mid
+    400036: Collider_RightLowArm_Min
+    400038: Collider_Stomach_Fat
+    400040: Collider_Stomach_Mid
+    400042: Collider_Stomach_Min
+    400044: Colliders_Hip_Fat
+    400046: Colliders_Hip_Mid
+    400048: Colliders_Hip_Min
+    2100000: No Name
+    2300000: Collider_LeftArm_Fat
+    2300002: Collider_LeftArm_Mid
+    2300004: Collider_LeftArm_Min
+    2300006: Collider_LeftLeg_Fat
+    2300008: Collider_LeftLeg_Mid
+    2300010: Collider_LeftLeg_Min
+    2300012: Collider_LeftLowArm_Fat
+    2300014: Collider_LeftLowArm_Mid
+    2300016: Collider_LeftLowArm_Min
+    2300018: Collider_RightArm_Fat
+    2300020: Collider_RightArm_Mid
+    2300022: Collider_RightArm_Min
+    2300024: Collider_RightLeg_Fat
+    2300026: Collider_RightLeg_Mid
+    2300028: Collider_RightLeg_Min
+    2300030: Collider_RightLowArm_Fat
+    2300032: Collider_RightLowArm_Mid
+    2300034: Collider_RightLowArm_Min
+    2300036: Collider_Stomach_Fat
+    2300038: Collider_Stomach_Mid
+    2300040: Collider_Stomach_Min
+    2300042: Colliders_Hip_Fat
+    2300044: Colliders_Hip_Mid
+    2300046: Colliders_Hip_Min
+    3300000: Collider_LeftArm_Fat
+    3300002: Collider_LeftArm_Mid
+    3300004: Collider_LeftArm_Min
+    3300006: Collider_LeftLeg_Fat
+    3300008: Collider_LeftLeg_Mid
+    3300010: Collider_LeftLeg_Min
+    3300012: Collider_LeftLowArm_Fat
+    3300014: Collider_LeftLowArm_Mid
+    3300016: Collider_LeftLowArm_Min
+    3300018: Collider_RightArm_Fat
+    3300020: Collider_RightArm_Mid
+    3300022: Collider_RightArm_Min
+    3300024: Collider_RightLeg_Fat
+    3300026: Collider_RightLeg_Mid
+    3300028: Collider_RightLeg_Min
+    3300030: Collider_RightLowArm_Fat
+    3300032: Collider_RightLowArm_Mid
+    3300034: Collider_RightLowArm_Min
+    3300036: Collider_Stomach_Fat
+    3300038: Collider_Stomach_Mid
+    3300040: Collider_Stomach_Min
+    3300042: Colliders_Hip_Fat
+    3300044: Colliders_Hip_Mid
+    3300046: Colliders_Hip_Min
+    4300000: Colliders_Hip_Min
+    4300002: Colliders_Hip_Mid
+    4300004: Collider_Stomach_Min
+    4300006: Collider_RightLeg_Min
+    4300008: Collider_LeftLeg_Min
+    4300010: Collider_RightArm_Min
+    4300012: Collider_LeftArm_Min
+    4300014: Collider_RightLowArm_Min
+    4300016: Collider_LeftLowArm_Min
+    4300018: Colliders_Hip_Fat
+    4300020: Collider_Stomach_Mid
+    4300022: Collider_Stomach_Fat
+    4300024: Collider_RightLowArm_Mid
+    4300026: Collider_RightLowArm_Fat
+    4300028: Collider_RightLeg_Mid
+    4300030: Collider_RightLeg_Fat
+    4300032: Collider_RightArm_Mid
+    4300034: Collider_RightArm_Fat
+    4300036: Collider_LeftArm_Mid
+    4300038: Collider_LeftLowArm_Mid
+    4300040: Collider_LeftLeg_Mid
+    4300042: Collider_LeftArm_Fat
+    4300044: Collider_LeftLowArm_Fat
+    4300046: Collider_LeftLeg_Fat
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
