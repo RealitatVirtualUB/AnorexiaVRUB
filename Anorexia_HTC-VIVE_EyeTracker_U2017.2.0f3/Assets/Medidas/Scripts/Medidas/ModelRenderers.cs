@@ -56,6 +56,8 @@ public class ModelRenderers : MonoBehaviour {
         fat = slider.value; 
         SetBlendShape(BlendShape.FAT, fat);
         colliderSetter.SetColliderSize(fat/100);
+        
+        colliderSetter.SaveInterpolationValue(fat / 100);
     }
 
     public void SetThin(Slider slider){
