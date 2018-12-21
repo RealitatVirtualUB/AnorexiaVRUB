@@ -47,6 +47,17 @@ public class Model : MonoBehaviour {
     private Vector3 lLegInitPos;
     private Vector3 rLegInitPos;
 
+    //weight
+    private float weight;
+
+    //imcs
+    public float minIMC = 16;
+    public float midIMC = 24;
+    public float maxIMC = 60;
+
+    //height
+    private float height;
+
     //heigh - collider fix
     public Transform bonesReference;
 

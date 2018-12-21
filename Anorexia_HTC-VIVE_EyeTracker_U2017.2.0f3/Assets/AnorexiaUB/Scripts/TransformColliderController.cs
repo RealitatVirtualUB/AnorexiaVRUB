@@ -13,6 +13,7 @@ public class TransformColliderController : MonoBehaviour {
     public List<Mesh> fatColliders;
     public List<MeshCollider> currentColliders;
 
+    List<Vector3> thinVertices = new List<Vector3>();
     List<Vector3> midVertices = new List<Vector3>();
     List<Vector3> fatVertices = new List<Vector3>();
 
@@ -22,8 +23,11 @@ public class TransformColliderController : MonoBehaviour {
 
         for (int i = 0; i < midColliders.Count; i++)
         {
+            List<Vector3> newThinVerticesData = new List<Vector3>();
             List<Vector3> newMidVerticesData = new List<Vector3>();
             List<Vector3> newFatVerticesData = new List<Vector3>();
+            //load vertices of the thin model
+            thinColliders[i].GetVertices(newThinVerticesData);
             //load vertices of the mid model
             midColliders[i].GetVertices(newMidVerticesData);
             //load the vertices of the fat model 
@@ -32,6 +36,7 @@ public class TransformColliderController : MonoBehaviour {
             for (int j= 0;j < newMidVerticesData.Count ;j++)
             {
                 //Debug.Log("index of the loop " + i + " vertex number " + j);
+                thinVertices.Add(newThinVerticesData[j]);
                 midVertices.Add(newMidVerticesData[j]);
                 fatVertices.Add(newFatVerticesData[j]);
             }
@@ -43,6 +48,8 @@ public class TransformColliderController : MonoBehaviour {
 		
 	}
 
+    //for capsule colliders
+    //interpolate btw the diferent radius of the capsule collider
     public void SetColliderSize(float interpolation){
         for(int i=0;i < colliderData.Count ;i++)
         {
@@ -56,13 +63,14 @@ public class TransformColliderController : MonoBehaviour {
         }
     }
 
+    //
     public void SaveInterpolationValue(float interpolation)
     {
         currentInterpolationValue = interpolation;
-        SetMeshColliderSize(0);
+        SetMeshColliderSize();
     }
 
-    public void SetMeshColliderSize(float interpolation)
+    public void SetMeshColliderSize()
     {
         List<Vector3> newVertices = new List<Vector3>();
 
@@ -76,8 +84,16 @@ public class TransformColliderController : MonoBehaviour {
             //for every vertex, interpolate between the to extrems with interpolation input
             for (int j=0;j < newMesh.vertices.Length; j++)
             {
+                Vector3 vertex = Vector3.zero;
                 //Debug.Log("id part: " + i  + " vertex number of the part: " + j + " index into de array: " + (baseIndexRow + j) + " size of vertex mid data: " + midVertices.Count + " size of vertex fat data: " + fatVertices.Count);
-                Vector3 vertex = Vector3.Lerp(midVertices[baseIndexRow + j], fatVertices[baseIndexRow + j], currentInterpolationValue);
+                if (currentInterpolationValue >= 0)
+                {
+                    vertex = Vector3.Lerp(midVertices[baseIndexRow + j], fatVertices[baseIndexRow + j], currentInterpolationValue);
+                }
+                else
+                {
+                    vertex = Vector3.Lerp(midVertices[baseIndexRow + j], thinVertices[baseIndexRow + j], -currentInterpolationValue);
+                }
                 newVertices.Add(vertex);
             }
             baseIndexRow += newMesh.vertices.Length;

@@ -8,9 +8,9 @@ public class MainScene : MonoBehaviour {
     public Model model;
     public bool activateSplashScreen;
     public GameObject splashImage;
-    public GameObject bodyPartsButtons;
-    private bool _visTouchActive;
-    public GameObject therapistController;
+    //public GameObject bodyPartsButtons;
+    //private bool _visTouchActive;
+    //public GameObject therapistController;
     //public Toggle touch;
     
 
@@ -37,10 +37,28 @@ public class MainScene : MonoBehaviour {
         model.avatarComponents.SetFat(s);
     }
 
-    public void ActivateVisTouch(){
-        model.GetComponent<ModelColliders>().DisableAll();
-        _visTouchActive = !_visTouchActive;
-        bodyPartsButtons.SetActive(_visTouchActive);
-        therapistController.SetActive(_visTouchActive);
+    public void WeightChanged(Slider s)
+    {
+        if (s.value >= 0) model.avatarComponents.SetWeightPorcentage(s.value, BlendShape.FAT);
+        else model.avatarComponents.SetWeightPorcentage(-s.value, BlendShape.THIN);
     }
+
+    public void InterpolateIMC(float imc, Slider s)
+    {
+        // de moment estem entrant directament el imc per o que sa d'entrar es la relacio de pes 
+        if(imc >= model.midIMC)
+        {
+            if (imc > model.maxIMC) model.maxIMC = imc;
+            float newValue = Mathf.InverseLerp(model.midIMC, model.maxIMC, imc);
+            s.value = newValue * 100;
+        }
+        else
+        {
+            if (imc < model.maxIMC) model.minIMC = imc;
+            float newValue = Mathf.InverseLerp(model.midIMC, model.minIMC, imc);
+            s.value = newValue * -100;
+        }
+        
+    }
+    
 }

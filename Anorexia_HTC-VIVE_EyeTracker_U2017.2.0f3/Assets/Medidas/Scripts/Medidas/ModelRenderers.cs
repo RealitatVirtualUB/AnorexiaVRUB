@@ -16,8 +16,9 @@ public class ModelRenderers : MonoBehaviour {
     private int gender;
     private float age = 100;
     private float height = 1;
-    private float fat;
-    private float thin;
+    private float fat; //deprecated
+    private float thin; //deprecated
+    private float weight;
     /*
     public BlendShape blendShape;
     [Range(100,0)]
@@ -63,6 +64,19 @@ public class ModelRenderers : MonoBehaviour {
     public void SetThin(Slider slider){
         thin = slider.value;
         SetBlendShape(BlendShape.THIN, thin);
+    }
+
+    public void SetWeightPorcentage(float value, BlendShape change)
+    {
+        weight = value;
+        Debug.Log("type " + change + " value of the slider " + value);
+        SetBlendShape(change,weight);
+        if(colliderSetter != null)
+        {
+            if (change == BlendShape.FAT) colliderSetter.SaveInterpolationValue(value / 100);
+            else colliderSetter.SaveInterpolationValue(-(value / 100));
+        }
+        
     }
 
     public void SetAge(float value)
