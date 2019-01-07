@@ -50,10 +50,11 @@ public class Model : MonoBehaviour {
     //weight
     private float weight;
 
-    //imcs
-    public float minIMC = 16;
-    public float midIMC = 24;
-    public float maxIMC = 60;
+    //the weight bar is the represantation of the weight, not the IMC only for men
+    public float minW = 40;
+    public float midW = 80;
+    public float maxW = 300;
+
 
     //height
     private float height;

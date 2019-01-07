@@ -43,22 +43,40 @@ public class MainScene : MonoBehaviour {
         else model.avatarComponents.SetWeightPorcentage(-s.value, BlendShape.THIN);
     }
 
-    public void InterpolateIMC(float imc, Slider s)
+    public void InterpolateIMC(float imc, float height, Slider s)
     {
         // de moment estem entrant directament el imc per o que sa d'entrar es la relacio de pes 
-        if(imc >= model.midIMC)
+        float newW = imc * height * height;
+        Debug.Log("imc is: " + imc + " weight is: " + newW + " height is: " + height);
+
+        //by imc
+        //if(imc >= model.midIMC)
+        //{
+        //    if (imc > model.maxIMC) model.maxIMC = imc;
+        //    float newValue = Mathf.InverseLerp(model.midIMC, model.maxIMC, imc);
+        //    s.value = newValue * 100;
+        //}
+        //else
+        //{
+        //    if (imc < model.maxIMC) model.minIMC = imc;
+        //    float newValue = Mathf.InverseLerp(model.midIMC, model.minIMC, imc);
+        //    s.value = newValue * -100;
+        //}
+
+        //by weight 
+        if (newW >= model.midW)
         {
-            if (imc > model.maxIMC) model.maxIMC = imc;
-            float newValue = Mathf.InverseLerp(model.midIMC, model.maxIMC, imc);
-            s.value = newValue * 100;
+            if (newW > model.maxW) model.maxW = newW;
+            float newValue = Mathf.InverseLerp(model.midW, model.maxW, newW);
+            s.value = (newValue * 100)/2;
         }
         else
         {
-            if (imc < model.maxIMC) model.minIMC = imc;
-            float newValue = Mathf.InverseLerp(model.midIMC, model.minIMC, imc);
-            s.value = newValue * -100;
+            if (newW < model.minW) model.minW = newW;
+            float newValue = Mathf.InverseLerp(model.midW, model.minW, newW);
+            s.value = (newValue * -100)/2;
         }
-        
+
     }
     
 }

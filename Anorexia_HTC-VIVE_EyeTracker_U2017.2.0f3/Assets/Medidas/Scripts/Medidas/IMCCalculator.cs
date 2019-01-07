@@ -45,7 +45,7 @@ public class IMCCalculator : MonoBehaviour {
         imcData.imc = (float)System.Math.Round((weight / height),2);
 
         //set weight model
-        this.GetComponent<MainScene>().InterpolateIMC(imcData.imc, weightSlider);
+        this.GetComponent<MainScene>().InterpolateIMC(imcData.imc,imcData.height, weightSlider);
 
         imcField.text = imcData.imc.ToString();
         weightField.placeholder.color = placeHolderInitialColor;
