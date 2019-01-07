@@ -69,7 +69,7 @@ public class ModelRenderers : MonoBehaviour {
     public void SetWeightPorcentage(float value, BlendShape change)
     {
         weight = value;
-        Debug.Log("type " + change + " value of the slider " + value);
+        //Debug.Log("type " + change + " value of the slider " + value);
         SetBlendShape(change,weight);
         if(colliderSetter != null)
         {

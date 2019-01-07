@@ -37,7 +37,7 @@ public class MainScene : MonoBehaviour {
         model.avatarComponents.SetFat(s);
     }
 
-    public void WeightChanged(Slider s)
+    virtual public void WeightChanged(Slider s)
     {
         if (s.value >= 0) model.avatarComponents.SetWeightPorcentage(s.value, BlendShape.FAT);
         else model.avatarComponents.SetWeightPorcentage(-s.value, BlendShape.THIN);

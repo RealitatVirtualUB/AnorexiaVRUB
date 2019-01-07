@@ -29,9 +29,14 @@ public class LightZonesOfInterest : MonoBehaviour {
     public Color disabledColor;
 
     public Slider sliderRef;
+    public float weightFactor = 0;
 
     int currentInterestZone = 0;
+
     float currentIntensity = 0;
+    float currentMaxIntensity = 0;
+    float currentMinIntensity = 0;
+    
     //private float desiredIntensity = 0;
     //private bool parseIntensity = false;
 
@@ -74,13 +79,16 @@ public class LightZonesOfInterest : MonoBehaviour {
 
     private void SetIntensity()
     {
-        currentIntensity = zonesOfinterest[currentInterestZone].maxIntensityOfInterest;
+        SetCurrentMaxMinIntensity();
+        //currentIntensity = zonesOfinterest[currentInterestZone].maxIntensityOfInterest;
+        currentIntensity = currentMaxIntensity;
         sliderRef.value = 1;
     }
 
     public void ChangeIntensity()
     {
-        currentIntensity = Mathf.Lerp(zonesOfinterest[currentInterestZone].minIntensityOfInterest, zonesOfinterest[currentInterestZone].maxIntensityOfInterest, sliderRef.value);
+        //currentIntensity = Mathf.Lerp(zonesOfinterest[currentInterestZone].minIntensityOfInterest, zonesOfinterest[currentInterestZone].maxIntensityOfInterest, sliderRef.value);
+        currentIntensity = Mathf.Lerp(currentMinIntensity,currentMaxIntensity, sliderRef.value);
     }
     
     public void ChangeIntensitySlider(float value)
@@ -101,6 +109,36 @@ public class LightZonesOfInterest : MonoBehaviour {
         }
     }
 
+    public void SetWeightFactor(float w)
+    {
+        weightFactor = w;
+        Debug.Log("weight factor is: " + weightFactor);
+        SetCurrentMaxMinIntensity();
+    }
+
+    public void SetCurrentMaxMinIntensity()
+    {
+        if (weightFactor >= 0) {
+            currentMaxIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].maxIntensityOfInterest, 
+                                                zonesOfinterest[currentInterestZone].maxFatIntensityOfInterest, 
+                                                weightFactor);
+            currentMinIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].minIntensityOfInterest,
+                                                zonesOfinterest[currentInterestZone].minFatIntensityOfInterest,
+                                                weightFactor);
+           
+        }
+        else
+        {
+            currentMaxIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].maxIntensityOfInterest,
+                                                zonesOfinterest[currentInterestZone].maxThinIntensityOfInterest,
+                                                weightFactor);
+            currentMinIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].minIntensityOfInterest,
+                                                zonesOfinterest[currentInterestZone].minThinIntensityOfInterest,
+                                                weightFactor);
+        }
+        Debug.Log("current max intensity: " + currentMaxIntensity + " & current min intensity: " + currentMinIntensity);
+    }
+
     [System.Serializable]
     public struct InterestZone
     {
@@ -108,5 +146,9 @@ public class LightZonesOfInterest : MonoBehaviour {
         public Transform positionZone;
         public float maxIntensityOfInterest;
         public float minIntensityOfInterest;
+        public float maxFatIntensityOfInterest;
+        public float minFatIntensityOfInterest;
+        public float maxThinIntensityOfInterest;
+        public float minThinIntensityOfInterest;
     }
 }
