@@ -1,0 +1,130 @@
+fileFormatVersion: 2
+guid: 4d649ae4581d580419420925f0be4217
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Collider_LeftArm_Fat
+    100002: Collider_LeftLeg_Fat
+    100004: Collider_LeftLowArm_Fat
+    100006: Collider_RightArm_Fat
+    100008: Collider_RightLeg_Fat
+    100010: Collider_RightLowArm_Fat
+    100012: Collider_Stomach_Fat
+    100014: Colliders_Hip_Fat
+    100016: //RootNode
+    400000: Collider_LeftArm_Fat
+    400002: Collider_LeftLeg_Fat
+    400004: Collider_LeftLowArm_Fat
+    400006: Collider_RightArm_Fat
+    400008: Collider_RightLeg_Fat
+    400010: Collider_RightLowArm_Fat
+    400012: Collider_Stomach_Fat
+    400014: Colliders_Hip_Fat
+    400016: //RootNode
+    2100000: No Name
+    2300000: Collider_LeftArm_Fat
+    2300002: Collider_LeftLeg_Fat
+    2300004: Collider_LeftLowArm_Fat
+    2300006: Collider_RightArm_Fat
+    2300008: Collider_RightLeg_Fat
+    2300010: Collider_RightLowArm_Fat
+    2300012: Collider_Stomach_Fat
+    2300014: Colliders_Hip_Fat
+    3300000: Collider_LeftArm_Fat
+    3300002: Collider_LeftLeg_Fat
+    3300004: Collider_LeftLowArm_Fat
+    3300006: Collider_RightArm_Fat
+    3300008: Collider_RightLeg_Fat
+    3300010: Collider_RightLowArm_Fat
+    3300012: Collider_Stomach_Fat
+    3300014: Colliders_Hip_Fat
+    4300000: Colliders_Hip_Fat
+    4300002: Collider_Stomach_Fat
+    4300004: Collider_RightLowArm_Fat
+    4300006: Collider_RightLeg_Fat
+    4300008: Collider_RightArm_Fat
+    4300010: Collider_LeftArm_Fat
+    4300012: Collider_LeftLowArm_Fat
+    4300014: Collider_LeftLeg_Fat
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
