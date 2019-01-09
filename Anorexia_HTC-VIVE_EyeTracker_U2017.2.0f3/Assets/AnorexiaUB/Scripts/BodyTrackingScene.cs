@@ -8,6 +8,7 @@ public class BodyTrackingScene : MainScene {
     public GameObject bodyPartsButtons;
     private bool _visTouchActive;
     public GameObject therapistController;
+    public GameObject mirror;
     // Use this for initialization
     void Start() {
 
@@ -31,5 +32,11 @@ public class BodyTrackingScene : MainScene {
         base.WeightChanged(s);
         Debug.Log("overriding weight function. We need to set the weight factor and paso for the light zones of interest");
         this.GetComponent<LightZonesOfInterest>().SetWeightFactor(s.value/100);
+    }
+     
+    public void DeactivateMirror()
+    {
+        if (mirror.activeSelf) mirror.SetActive(false);
+        else mirror.SetActive(true);
     }
 }
