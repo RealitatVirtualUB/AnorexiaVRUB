@@ -49,6 +49,10 @@ public class Model : MonoBehaviour {
 
     //weight
     private float weight;
+    private float imcBase;
+    private float imcIncremented;
+    private int numOfSession;
+    
 
     //the weight bar is the represantation of the weight, not the IMC only for men
     public float minW = 40;
@@ -161,7 +165,7 @@ public class Model : MonoBehaviour {
             if (data.ContainsKey(child.name))
             {
                 Dictionary<string, object> objectData = (Dictionary<string, object>)data[child.name];
-                Debug.Log(child.name);
+                //Debug.Log(child.name);
                 if (/*"Model" == child.GetChild(0).name && */objectData.ContainsKey("scale"))
                 {
                     Dictionary<string, object> scale = (Dictionary<string, object>)objectData["scale"];
@@ -185,8 +189,44 @@ public class Model : MonoBehaviour {
         HipsSeparation(hipsSeparation);
     }
 
+    public void DeserializeImcData(Dictionary<string, object> data)
+    {
+        //parse weight value
+        if (float.TryParse(data["weight"].ToString(), out weight)) Debug.Log("succed to parse weight: " + weight);
+        else Debug.Log("error to parse weight value");
+        //parse height value
+        if (float.TryParse(data["height"].ToString(), out height))Debug.Log("succed to parse height: " + height);
+        else Debug.Log("error to parse height value");
+        //parse imc value
+        if (float.TryParse(data["imc"].ToString(), out imcBase)) Debug.Log("succed to parse imc: " + imcBase);
+        else Debug.Log("error to parse imc base value");
+        //parse imc incremented value 
+        //if (float.TryParse(data["imcIncremented"].ToString(), out imcIncremented)) Debug.Log("succed to parse imcincremented: " + imcIncremented);
+        //else Debug.Log("error to parse imc incremented value");
+        ////parse imc incremented value 
+        //if (int.TryParse(data["sessionNumber"].ToString(), out numOfSession))
+        //{
+        //    Debug.Log("succed to parse session number: " + numOfSession);
+        //    numOfSession++;
+        //}
+
+        //else Debug.Log("error to parse number of session value");
+
+    }
+
     public void SetModelData(Dictionary<string, object> data)
     {
         DeserializeModelData(transform, data);
+    }
+
+    public bool TryInterpolateIMC(ref float imc,ref float h)
+    {
+        if (imcBase != 0 && height != 0)
+        {
+            imc = imcBase;
+            h = height;
+            return true;
+        }
+        else return false;
     }
 }

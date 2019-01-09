@@ -9,9 +9,20 @@ public class BodyTrackingScene : MainScene {
     private bool _visTouchActive;
     public GameObject therapistController;
     public GameObject mirror;
+    public Slider weightSlider;
     // Use this for initialization
     void Start() {
-
+        PrintInGameValues();
+        if (InGameData.PacientId != "")
+        {
+            this.GetComponent<AvatarLoader>().LoadAvatar(InGameData.PacientId);
+            float imc = 0;
+            float h = 0;
+            if (this.GetComponent<AvatarLoader>().model.TryInterpolateIMC(ref imc, ref h))
+            {
+                InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
+            }
+        }
     }
 
     // Update is called once per frame

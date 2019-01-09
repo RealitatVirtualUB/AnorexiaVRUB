@@ -43,6 +43,8 @@ public class IMCCalculator : MonoBehaviour {
         imcData.weight = weight;
         height *= height;
         imcData.imc = (float)System.Math.Round((weight / height),2);
+        imcData.imcIncremented = imcData.imc;
+        imcData.sessionNumber = 1;
 
         //set weight model
         this.GetComponent<MainScene>().InterpolateIMC(imcData.imc,imcData.height, weightSlider);
@@ -101,6 +103,8 @@ public class IMCCalculator : MonoBehaviour {
         data["weight"] = imcData.weight;
         data["height"] = imcData.height;
         data["imc"] = imcData.imc;
+        data["imcIncremented"] = imcData.imcIncremented;
+        data["sessionNumber"] = imcData.sessionNumber;
         return data;
     }
 }

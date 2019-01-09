@@ -18,7 +18,8 @@ public class MainScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         ActivateSplashImage();
-	}
+        PrintInGameValues();
+    }
 
     void ActivateSplashImage(){
         if (activateSplashScreen) splashImage.SetActive(true); 
@@ -77,6 +78,13 @@ public class MainScene : MonoBehaviour {
             s.value = (newValue * -100)/2;
         }
 
+    }
+
+    protected void PrintInGameValues()
+    {
+        Debug.Log("printing pacient values. id: " + InGameData.PacientId +
+                " imc increment: " + InGameData.ImcIncrement + 
+                " number of the session: " + InGameData.Sn);
     }
     
 }

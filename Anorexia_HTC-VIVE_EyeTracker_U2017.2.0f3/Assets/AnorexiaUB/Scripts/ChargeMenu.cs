@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class ChargeMenu : MonoBehaviour {
 
@@ -17,7 +19,7 @@ public class ChargeMenu : MonoBehaviour {
     public List<Sprite> marcks;
 
     //pacients information
-    int pacientID = 0;
+    string pacientID = "";
     float imcIncrement = 1;
     int numOfSession = 0;
     bool clinicPacient = true;
@@ -55,7 +57,13 @@ public class ChargeMenu : MonoBehaviour {
 
     public void UpdatePacientId(Text newId)
     {
-        if (int.TryParse(newId.text, out pacientID)) Debug.Log("id is valid: " + pacientID);
+        int i;
+        if (int.TryParse(newId.text, out i))
+        {
+            pacientID = newId.text;
+            Debug.Log("id is valid: " + i);
+        }
+
         else Debug.Log("invalid id. try to put other");
     }
 
@@ -85,6 +93,33 @@ public class ChargeMenu : MonoBehaviour {
             else Debug.Log("we need to set mack sprites");
             clinicPacient = true;
         }
+    }
+
+    public void ChargePacient()
+    {
+        if(pacientID != "")
+        {
+            InGameData.PacientId = pacientID;
+            InGameData.ImcIncrement = imcIncrement;
+            InGameData.Sn = numOfSession;
+            //Debug.Log(  "pacient id: "+InGameData.PacientId+
+            //            " imc incremented desired: "+ InGameData.ImcIncrement+
+            //            " session selected: "+InGameData.Sn);
+            SceneManager.LoadScene(1);
+        }
+        else Debug.Log("invalid value");
+    }
+
+    public void CreateNewPacient()
+    {
+        if (pacientID != "")
+        {
+            InGameData.PacientId = pacientID;
+            InGameData.IsClinic = clinicPacient;
+            Debug.Log("new pacient created. pacient id: " + InGameData.PacientId + " isclinic ? "+ InGameData.IsClinic);
+            SceneManager.LoadScene(0);
+        }
+        else Debug.Log("incorrect Id");
     }
 }
 

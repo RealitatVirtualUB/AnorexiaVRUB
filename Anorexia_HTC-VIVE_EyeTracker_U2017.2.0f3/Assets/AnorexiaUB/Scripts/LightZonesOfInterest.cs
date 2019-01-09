@@ -136,7 +136,7 @@ public class LightZonesOfInterest : MonoBehaviour {
                                                 zonesOfinterest[currentInterestZone].minThinIntensityOfInterest,
                                                 weightFactor);
         }
-        Debug.Log("current max intensity: " + currentMaxIntensity + " & current min intensity: " + currentMinIntensity);
+        //Debug.Log("current max intensity: " + currentMaxIntensity + " & current min intensity: " + currentMinIntensity);
     }
 
     [System.Serializable]
