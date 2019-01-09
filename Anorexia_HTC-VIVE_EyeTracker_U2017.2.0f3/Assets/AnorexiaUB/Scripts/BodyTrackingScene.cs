@@ -10,10 +10,16 @@ public class BodyTrackingScene : MainScene {
     public GameObject therapistController;
     public GameObject mirror;
     public Slider weightSlider;
+    private float _fadeDuration = 2f;
+    private bool faded = false;
+    private float counter = 0;
     // Use this for initialization
     void Start() {
+        FadeToWhite(0);
+        Invoke("FadeFromWhite", _fadeDuration);
         PrintInGameValues();
-        if (InGameData.PacientId != "")
+        int i = 0;
+        if (int.TryParse(InGameData.PacientId,out i))
         {
             this.GetComponent<AvatarLoader>().LoadAvatar(InGameData.PacientId);
             float imc = 0;
@@ -49,5 +55,29 @@ public class BodyTrackingScene : MainScene {
     {
         if (mirror.activeSelf) mirror.SetActive(false);
         else mirror.SetActive(true);
+    }
+
+    private void FadeToWhite(float time)
+    {
+        //set start color
+        SteamVR_Fade.Start(Color.clear, 0f);
+        //set and start fade to
+        SteamVR_Fade.Start(Color.white, time);
+        faded = true;
+    }
+
+    private void FadeFromWhite(float time)
+    {
+        //set start color
+        SteamVR_Fade.Start(Color.white, 0f);
+        //set and start fade to
+        SteamVR_Fade.Start(Color.clear,time);
+        faded = false;
+    }
+
+    public void switchFade()
+    {
+        if (!faded) FadeToWhite(_fadeDuration);
+        else FadeFromWhite(_fadeDuration);
     }
 }
