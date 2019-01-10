@@ -53,7 +53,8 @@ public class QuestionController : MonoBehaviour {
 
     public void EndQuestion()
     {
-        this.GetComponent<LightZonesOfInterest>().ChangeIntensitySlider(questionPanel.GetComponent<QuestionPanel>().stressBar.value/100);
+        //this.GetComponent<LightZonesOfInterest>().ChangeIntensitySlider(questionPanel.GetComponent<QuestionPanel>().stressBar.value/100);
+        this.GetComponent<LightZonesOfInterest>().ChangeObjectiveIntensity(questionPanel.GetComponent<QuestionPanel>().stressBar.value / 100);
         questionPanel.SetActive(false);
         questionActivated = false;
         playerController.inputActivated = false;

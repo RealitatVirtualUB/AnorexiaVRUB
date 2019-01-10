@@ -30,8 +30,14 @@ public class LightZonesOfInterest : MonoBehaviour {
 
     public Slider sliderRef;
     public float weightFactor = 0;
+    public float parseDuration = 20;
 
     int currentInterestZone = 0;
+
+    private float currentSliderValue = 0;
+    private float objectiveSliderValue = 0;
+    private bool parseZOI = false;
+    private float interval = 0;
 
     float currentIntensity = 0;
     float currentMaxIntensity = 0;
@@ -49,7 +55,17 @@ public class LightZonesOfInterest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         ChangeWorldPosMaterial();
-        Debug.Log("weight factor is: "+ weightFactor );
+        if (parseZOI)
+        {
+            currentSliderValue += interval;
+            ChangeIntensitySlider(currentSliderValue);
+            if ((Mathf.Round(currentSliderValue * 100f) / 100f) == (Mathf.Round(objectiveSliderValue * 100f) / 100f))
+            {
+                parseZOI = false;
+                Debug.Log("end parse intensity");
+            }
+        }
+        //Debug.Log("weight factor is: "+ weightFactor );
     }
 
     public void ChangeAffectionZone(int id)
@@ -95,6 +111,14 @@ public class LightZonesOfInterest : MonoBehaviour {
     public void ChangeIntensitySlider(float value)
     {
         sliderRef.value = value;
+    }
+
+    public void ChangeObjectiveIntensity(float value)
+    {
+        currentSliderValue = sliderRef.value;
+        objectiveSliderValue = value;
+        interval = (objectiveSliderValue - currentSliderValue) / parseDuration;
+        parseZOI = true;
     }
 
     private void ChangeWorldPosMaterial()
