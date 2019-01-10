@@ -69,13 +69,13 @@ public class MainScene : MonoBehaviour {
         {
             if (newW > model.maxW) model.maxW = newW;
             float newValue = Mathf.InverseLerp(model.midW, model.maxW, newW);
-            s.value = (newValue * 100)/2;
+            s.value = (newValue * 100);
         }
         else
         {
             if (newW < model.minW) model.minW = newW;
             float newValue = Mathf.InverseLerp(model.midW, model.minW, newW);
-            s.value = (newValue * -100)/2;
+            s.value = (newValue * -100);
         }
 
     }

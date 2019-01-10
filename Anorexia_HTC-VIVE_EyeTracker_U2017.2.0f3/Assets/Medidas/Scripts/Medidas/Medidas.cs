@@ -199,10 +199,12 @@ public class Medidas : MonoBehaviour {
         //model.SerializeModelData();
         //modelData = imcCalculator.SerializeData();
 
-
+//set save avatar
 #if UNITY_EDITOR
         string filePath = Application.dataPath + "/Pictures/";
-        string fileName = subjectIdField.text + ".txt";
+        //change id of the avatar
+        //string fileName = subjectIdField.text + ".txt";
+        string fileName = InGameData.PacientId +".txt";
 #else
         string fileName = "model.txt";
 #endif

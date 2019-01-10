@@ -105,6 +105,7 @@ public class IMCCalculator : MonoBehaviour {
         data["imc"] = imcData.imc;
         data["imcIncremented"] = imcData.imcIncremented;
         data["sessionNumber"] = imcData.sessionNumber;
+        data["isClinic"] = InGameData.IsClinic;
         return data;
     }
 }
