@@ -49,6 +49,7 @@ public class LightZonesOfInterest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         ChangeWorldPosMaterial();
+        Debug.Log("weight factor is: "+ weightFactor );
     }
 
     public void ChangeAffectionZone(int id)
@@ -131,10 +132,10 @@ public class LightZonesOfInterest : MonoBehaviour {
         {
             currentMaxIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].maxIntensityOfInterest,
                                                 zonesOfinterest[currentInterestZone].maxThinIntensityOfInterest,
-                                                weightFactor);
-            currentMinIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].minIntensityOfInterest,
+                                                -weightFactor); 
+             currentMinIntensity = Mathf.Lerp(   zonesOfinterest[currentInterestZone].minIntensityOfInterest,
                                                 zonesOfinterest[currentInterestZone].minThinIntensityOfInterest,
-                                                weightFactor);
+                                                -weightFactor); 
         }
         //Debug.Log("current max intensity: " + currentMaxIntensity + " & current min intensity: " + currentMinIntensity);
     }

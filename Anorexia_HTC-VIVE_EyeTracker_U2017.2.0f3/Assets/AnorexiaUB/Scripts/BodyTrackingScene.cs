@@ -18,17 +18,8 @@ public class BodyTrackingScene : MainScene {
         FadeToWhite(0);
         Invoke("FadeFromWhite", _fadeDuration);
         PrintInGameValues();
-        int i = 0;
-        if (int.TryParse(InGameData.PacientId,out i))
-        {
-            this.GetComponent<AvatarLoader>().LoadAvatar(InGameData.PacientId);
-            float imc = 0;
-            float h = 0;
-            if (this.GetComponent<AvatarLoader>().model.TryInterpolateIMC(ref imc, ref h))
-            {
-                InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
-            }
-        }
+        GetComponent<AvatarLoader>().model.FixModelCollidersPivotIssue();
+        LoadLocalAvatar();
     }
 
     // Update is called once per frame
@@ -79,5 +70,20 @@ public class BodyTrackingScene : MainScene {
     {
         if (!faded) FadeToWhite(_fadeDuration);
         else FadeFromWhite(_fadeDuration);
+    }
+
+    public void LoadLocalAvatar()
+    {
+        int i = 0;
+        if (int.TryParse(InGameData.PacientId, out i))
+        {
+            this.GetComponent<AvatarLoader>().LoadAvatar(InGameData.PacientId);
+            float imc = 0;
+            float h = 0;
+            if (this.GetComponent<AvatarLoader>().model.TryInterpolateIMC(ref imc, ref h))
+            {
+                InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
+            }
+        }
     }
 }

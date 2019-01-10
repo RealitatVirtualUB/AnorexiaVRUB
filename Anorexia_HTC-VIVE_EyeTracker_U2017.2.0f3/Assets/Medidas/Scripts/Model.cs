@@ -76,8 +76,7 @@ public class Model : MonoBehaviour {
     }
 
     public void Start(){
-        FixModelCollidersPivotIssue();
-
+        //FixModelCollidersPivotIssue();
     }
 
     public void ShouldersSeparation(float fValue){

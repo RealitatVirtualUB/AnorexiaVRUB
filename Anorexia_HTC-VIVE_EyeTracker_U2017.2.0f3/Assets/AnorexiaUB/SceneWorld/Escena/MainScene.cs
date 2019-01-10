@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainScene : MonoBehaviour {
 
@@ -85,6 +86,11 @@ public class MainScene : MonoBehaviour {
         Debug.Log("printing pacient values. id: " + InGameData.PacientId +
                 " imc increment: " + InGameData.ImcIncrement + 
                 " number of the session: " + InGameData.Sn);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(2);
     }
     
 }
