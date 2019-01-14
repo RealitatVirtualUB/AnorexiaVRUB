@@ -87,6 +87,7 @@ public class BodyTrackingScene : MainScene {
             float h = 0;
             if (this.GetComponent<AvatarLoader>().model.TryInterpolateIMC(ref imc, ref h))
             {
+                Debug.Log("imc: " + imc + " h: " + h);
                 InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
             }
         }

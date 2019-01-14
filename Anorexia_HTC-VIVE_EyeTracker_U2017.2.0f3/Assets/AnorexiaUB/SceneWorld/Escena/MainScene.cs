@@ -78,7 +78,7 @@ public class MainScene : MonoBehaviour {
             float newValue = Mathf.InverseLerp(model.midW, model.minW, newW);
             s.value = (newValue * -100);
         }
-
+        Debug.Log("slider value is: " + s.value);
     }
 
     protected void PrintInGameValues()
