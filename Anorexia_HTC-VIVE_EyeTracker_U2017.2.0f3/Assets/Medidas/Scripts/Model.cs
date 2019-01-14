@@ -199,6 +199,7 @@ public class Model : MonoBehaviour {
         //parse imc value
         if (float.TryParse(data["imc"].ToString(), out imcBase)) Debug.Log("succed to parse imc: " + imcBase);
         else Debug.Log("error to parse imc base value");
+        imcIncremented = imcBase + InGameData.ImcIncrement; // revisar
         //parse imc incremented value 
         //if (float.TryParse(data["imcIncremented"].ToString(), out imcIncremented)) Debug.Log("succed to parse imcincremented: " + imcIncremented);
         //else Debug.Log("error to parse imc incremented value");
@@ -227,5 +228,13 @@ public class Model : MonoBehaviour {
             return true;
         }
         else return false;
+    }
+
+    public void GetData(ref List<string> Data)
+    {
+        Data.Add(imcBase.ToString());
+        Data.Add(imcIncremented.ToString());
+        Data.Add(height.ToString());
+        Data.Add(numOfSession.ToString());
     }
 }

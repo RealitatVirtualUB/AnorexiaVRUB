@@ -9,10 +9,12 @@ public class BodyTrackingScene : MainScene {
     private bool _visTouchActive;
     public GameObject therapistController;
     public GameObject mirror;
+    public Text statistics;
     public Slider weightSlider;
     private float _fadeDuration = 2f;
     private bool faded = false;
     private float counter = 0;
+    
     // Use this for initialization
     void Start() {
         FadeToWhite(0);
@@ -20,6 +22,7 @@ public class BodyTrackingScene : MainScene {
         PrintInGameValues();
         GetComponent<AvatarLoader>().model.FixModelCollidersPivotIssue();
         LoadLocalAvatar();
+        SetStatistics();
     }
 
     // Update is called once per frame
@@ -50,17 +53,19 @@ public class BodyTrackingScene : MainScene {
 
     private void FadeToWhite(float time)
     {
+        Color newColor = new Color(0.1f, 0.1f, 0.1f, 1f);
         //set start color
         SteamVR_Fade.Start(Color.clear, 0f);
         //set and start fade to
-        SteamVR_Fade.Start(Color.white, time);
+        SteamVR_Fade.Start(newColor, time);
         faded = true;
     }
 
     private void FadeFromWhite(float time)
     {
+        Color newColor = new Color(0.1f,0.1f,0.1f,1f);
         //set start color
-        SteamVR_Fade.Start(Color.white, 0f);
+        SteamVR_Fade.Start(newColor, 0f);
         //set and start fade to
         SteamVR_Fade.Start(Color.clear,time);
         faded = false;
@@ -85,5 +90,17 @@ public class BodyTrackingScene : MainScene {
                 InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
             }
         }
+    }
+
+    void SetStatistics()
+    {
+        List<string> d = new List<string>();
+        GetComponent<AvatarLoader>().model.GetData(ref d);
+        string newStatistics = ("ID: " + InGameData.PacientId + "\n" +
+                                "IMC base: " + d[0] + "\n" +
+                                "IMC incremented " + d[1] + "\n" +
+                                "height: " + d[2]+ "\n" +
+                                "session: "+ d[3]);
+        statistics.text = newStatistics;
     }
 }

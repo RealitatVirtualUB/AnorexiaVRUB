@@ -42,7 +42,7 @@ public class QuestionController : MonoBehaviour {
     {
         if (questionActivated) return;
         questionPanel.SetActive(true);
-        if (Questions.Count != 0) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[questionCounter % (Questions.Count - 1)]);
+        if (Questions.Count != 0) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[questionCounter % (Questions.Count)]);
         else Debug.Log("Any question still setted");
         playerController.inputActivated = true;
         questionActivated = true;
