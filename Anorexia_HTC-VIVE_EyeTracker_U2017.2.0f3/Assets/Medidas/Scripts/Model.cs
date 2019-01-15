@@ -230,6 +230,13 @@ public class Model : MonoBehaviour {
         else return false;
     }
 
+    public void CalculateMaxMinWeightRelation(float h)
+    {
+        minW = 14 * h * h;
+        midW = 22 * h * h;
+        maxW = 45 * h * h;
+    }
+
     public void GetData(ref List<string> Data)
     {
         Data.Add(imcBase.ToString());

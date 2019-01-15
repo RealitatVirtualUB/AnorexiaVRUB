@@ -50,7 +50,7 @@ public class MainScene : MonoBehaviour {
         // de moment estem entrant directament el imc per o que sa d'entrar es la relacio de pes 
         float newW = imc * height * height;
         Debug.Log("imc is: " + imc + " weight is: " + newW + " height is: " + height);
-
+        model.CalculateMaxMinWeightRelation(height);
         //by imc
         //if(imc >= model.midIMC)
         //{
