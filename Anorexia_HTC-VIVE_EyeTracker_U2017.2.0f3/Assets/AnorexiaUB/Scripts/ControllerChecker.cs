@@ -18,6 +18,9 @@ public class ControllerChecker : MonoBehaviour {
 
     public bool inputActivated = false;
     private bool parseValues = false;
+    public float timeBTWupdates = 0.5f;
+
+    private float timer = 0;
 
     void Awake(){
         trackedObj = GetComponent<SteamVR_TrackedObject>();
@@ -25,7 +28,11 @@ public class ControllerChecker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (inputActivated) TakeInput();
+        if (inputActivated)
+        {
+            timer += Time.deltaTime;
+            TakeInput();
+        }
 	}
 
     void TryController(){
@@ -89,7 +96,12 @@ public class ControllerChecker : MonoBehaviour {
 
         //value
         Vector2 touchpadValue = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
-        if (parseValues) qc.questionPanel.GetComponent<QuestionPanel>().MoveSlider(touchpadValue.x);
+        if (parseValues && timer > timeBTWupdates)
+        {
+            qc.questionPanel.GetComponent<QuestionPanel>().MoveSlider(touchpadValue.x);
+            timer = 0;
+        }
+
         //Debug.Log("Touchpad value " + touchpadValue);
         #endregion
     }

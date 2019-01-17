@@ -33,17 +33,20 @@ public class QuestionController : MonoBehaviour {
             if(timer > timeBtwQuestions)
             {
                 timer = 0;
-                ChargeNextQuestion();
+                ChargeNextQuestion(false);
             }
         }
 	}
 
-    public void ChargeNextQuestion()
+    public void ChargeNextQuestion(bool firstOrLast)
     {
         if (questionActivated) return;
         questionPanel.SetActive(true);
-        if (Questions.Count != 0) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[questionCounter % (Questions.Count)]);
+        //if (Questions.Count != 0 && !firstOrLast) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[questionCounter % (Questions.Count)]);
+        if (Questions.Count != 0 && !firstOrLast) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[1]);
+        else if(Questions.Count != 0 && firstOrLast) questionPanel.GetComponent<QuestionPanel>().SetQuestion(Questions[0]);
         else Debug.Log("Any question still setted");
+        questionPanel.GetComponent<QuestionPanel>().ResetStressBarValue();
         playerController.inputActivated = true;
         questionActivated = true;
         questionCounter++;

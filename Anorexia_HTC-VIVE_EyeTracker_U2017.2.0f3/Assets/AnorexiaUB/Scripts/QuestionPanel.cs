@@ -9,12 +9,13 @@ public class QuestionPanel : MonoBehaviour {
     public Text valueText;
     public Text questionText;
     public int updateValue = 1;
+    
 	// Use this for initialization
 
     public void UpdateStressValue()
     {
         float value = stressBar.value;
-        valueText.text = value.ToString() + "%";
+        valueText.text = value.ToString() + "%"; 
     }
 
     public void ResetStressBarValue()
@@ -31,7 +32,7 @@ public class QuestionPanel : MonoBehaviour {
 
     public void MoveSlider(float v)
     {
-        if(v > 0)stressBar.value += updateValue;
+        if (v > 0) stressBar.value += updateValue;
         else stressBar.value -= updateValue;
         Debug.Log("moving intensity slider");
     }

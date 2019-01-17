@@ -101,7 +101,7 @@ public class BodyTrackingScene : MainScene {
                                 "IMC base: " + d[0] + "\n" +
                                 "IMC incremented " + d[1] + "\n" +
                                 "height: " + d[2]+ "\n" +
-                                "session: "+ d[3]);
+                                "session: "+ InGameData.Sn);
         statistics.text = newStatistics;
     }
 }
