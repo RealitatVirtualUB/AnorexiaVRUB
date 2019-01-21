@@ -232,6 +232,9 @@ public class Model : MonoBehaviour {
 
     public void CalculateMaxMinWeightRelation(float h)
     {
+        float minIMC = 0, midIMC = 0, maxIMC = 0;
+        CalcMinMaxImcSilueteByAgeAndGender(20,0,ref minIMC,ref maxIMC,ref midIMC);
+        //use de formula for minW, maxW, midW
         minW = 14 * h * h;
         midW = 22 * h * h;
         maxW = 45 * h * h;
@@ -243,5 +246,27 @@ public class Model : MonoBehaviour {
         Data.Add(imcIncremented.ToString());
         Data.Add(height.ToString());
         Data.Add(numOfSession.ToString());
+    }
+
+    void CalcMinMaxImcSilueteByAgeAndGender(int age,int gender, ref float minImc, ref float maxImc, ref float midImc)
+    {
+        float a, b, c, dmin, dmid, dmax;
+        if (age >= 20) age = 20;
+        if(gender == 0)
+        {
+            //women
+            a = -0.0375f; b = 1.675f; c = 3.2f;
+            dmin = -8f; dmid = -0.3f; dmax = 23f;
+        }
+        else
+        {
+            //men
+            a = -0.0125f; b = 1.075f; c = 6.5f;
+            dmin = -8f; dmid = 1f; dmax = 22f;
+        }
+
+        minImc = (a * age * age) + (b * age) + c + dmin;
+        midImc = (a * age * age) + (b * age) + c + dmid;
+        maxImc = (a * age * age) + (b * age) + c + dmax;
     }
 }
