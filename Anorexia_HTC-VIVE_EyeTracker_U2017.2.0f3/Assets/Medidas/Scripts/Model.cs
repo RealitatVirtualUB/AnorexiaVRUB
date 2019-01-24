@@ -230,14 +230,18 @@ public class Model : MonoBehaviour {
         else return false;
     }
 
-    public void CalculateMaxMinWeightRelation(float h)
+    public void CalculateMaxMinWeightRelation(float h, int age, int gender)
     {
         float minIMC = 0, midIMC = 0, maxIMC = 0;
-        CalcMinMaxImcSilueteByAgeAndGender(20,0,ref minIMC,ref maxIMC,ref midIMC);
+        CalcMinMaxImcSilueteByAgeAndGender(age,gender,ref minIMC,ref maxIMC,ref midIMC);
         //use de formula for minW, maxW, midW
-        minW = 14 * h * h;
-        midW = 22 * h * h;
-        maxW = 45 * h * h;
+        //test
+        minW = minIMC * h * h;
+        midW = midIMC * h * h;
+        maxW = maxIMC * h * h;
+        //minW = 14 * h * h;
+        //midW = 22 * h * h;
+        //maxW = 45 * h * h;
     }
 
     public void GetData(ref List<string> Data)
@@ -252,7 +256,7 @@ public class Model : MonoBehaviour {
     {
         float a, b, c, dmin, dmid, dmax;
         if (age >= 20) age = 20;
-        if(gender == 0)
+        if(gender == 1)
         {
             //women
             a = -0.0375f; b = 1.675f; c = 3.2f;

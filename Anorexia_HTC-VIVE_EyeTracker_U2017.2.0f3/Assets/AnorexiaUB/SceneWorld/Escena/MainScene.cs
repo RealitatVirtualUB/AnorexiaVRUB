@@ -45,12 +45,12 @@ public class MainScene : MonoBehaviour {
         else model.avatarComponents.SetWeightPorcentage(-s.value, BlendShape.THIN);
     }
 
-    public void InterpolateIMC(float imc, float height, Slider s)
+    public void InterpolateIMC(float imc, float height, Slider s, int age, int gender)
     {
         // de moment estem entrant directament el imc per o que sa d'entrar es la relacio de pes 
         float newW = imc * height * height;
-        Debug.Log("imc is: " + imc + " weight is: " + newW + " height is: " + height);
-        model.CalculateMaxMinWeightRelation(height);
+        Debug.Log("imc is: " + imc + " weight is: " + newW + " height is: " + height + " age is: " + age + " and gender is: "+ gender);
+        model.CalculateMaxMinWeightRelation(height, age, gender);
         //by imc
         //if(imc >= model.midIMC)
         //{

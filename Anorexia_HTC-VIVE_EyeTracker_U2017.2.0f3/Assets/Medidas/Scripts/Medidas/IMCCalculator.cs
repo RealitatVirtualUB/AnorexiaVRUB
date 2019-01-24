@@ -8,11 +8,13 @@ public class IMCCalculator : MonoBehaviour {
 
     public InputField weightField;
     public InputField heightField;
+    public InputField ageField;
     public InputField imcField;
     public Slider heightSlider;
     public Slider weightSlider;
     private Color placeHolderInitialColor;
     public IMCData imcData;
+    int gender = 0;
     //public List<IMCData> data;
 
     void Awake(){
@@ -29,14 +31,22 @@ public class IMCCalculator : MonoBehaviour {
         }
     }
 
+    public void SetGender(int g)
+    {
+        if (g != 0 || g != 1) return;
+        else gender = g;
+    }
+
     public void CalculateIMC(){
         if (!CheckFields()) return;
         float weight = float.Parse(weightField.text);
         float height = float.Parse(heightField.text);
+        int age = int.Parse(ageField.text);
         //set height model
         Debug.Log("height is " + height);
         heightSlider.value = Mathf.Clamp01(height/200);
         Debug.Log("height relation is " + heightSlider.value);
+        Debug.Log("age is: " + age);
 
         height /= 100;
         imcData.height = height;
@@ -46,8 +56,11 @@ public class IMCCalculator : MonoBehaviour {
         imcData.imcIncremented = imcData.imc;
         imcData.sessionNumber = 1;
 
-        //set weight model
-        this.GetComponent<MainScene>().InterpolateIMC(imcData.imc,imcData.height, weightSlider);
+        //set weight mode
+        this.GetComponent<MainScene>().model.avatarComponents.SetAge(age);
+        //if (gender == 1) gender *= 100;
+        //this.GetComponent<MainScene>().model.avatarComponents.SetGender(gender);
+        this.GetComponent<MainScene>().InterpolateIMC(imcData.imc,imcData.height, weightSlider, age, gender);
 
         imcField.text = imcData.imc.ToString();
         weightField.placeholder.color = placeHolderInitialColor;
@@ -58,6 +71,7 @@ public class IMCCalculator : MonoBehaviour {
     public bool CheckFields(){
         bool weightFilled;
         bool heightFilled;
+        bool ageFilled;
         if (string.IsNullOrEmpty(weightField.text)){
             weightField.placeholder.color = Color.red;
             weightFilled = false;
@@ -73,7 +87,17 @@ public class IMCCalculator : MonoBehaviour {
             heightFilled = true;
         }
 
-        if(!weightFilled || !heightFilled){
+        if (string.IsNullOrEmpty(ageField.text))
+        {
+            ageField.placeholder.color = Color.red;
+            ageFilled = false;
+        }
+        else
+        {
+            ageFilled = true;
+        }
+
+        if (!weightFilled || !heightFilled || !ageFilled){
             imcField.text = "";
             return false;
         }else{

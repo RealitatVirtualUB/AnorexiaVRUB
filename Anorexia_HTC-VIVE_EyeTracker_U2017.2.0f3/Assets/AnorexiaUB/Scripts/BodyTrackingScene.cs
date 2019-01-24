@@ -85,10 +85,13 @@ public class BodyTrackingScene : MainScene {
             this.GetComponent<AvatarLoader>().LoadAvatar(InGameData.PacientId);
             float imc = 0;
             float h = 0;
+            int age = 0;
+            int gender = 0;
+            this.GetComponent<AvatarLoader>().model.avatarComponents.GetAgeAndGender(ref age, ref gender);
             if (this.GetComponent<AvatarLoader>().model.TryInterpolateIMC(ref imc, ref h))
             {
                 Debug.Log("imc: " + imc + " h: " + h);
-                InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider);
+                InterpolateIMC(imc + InGameData.ImcIncrement, h, weightSlider, age,gender);
             }
         }
     }

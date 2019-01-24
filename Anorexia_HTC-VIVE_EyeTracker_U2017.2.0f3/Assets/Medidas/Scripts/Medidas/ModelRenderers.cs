@@ -45,7 +45,7 @@ public class ModelRenderers : MonoBehaviour {
         
     public void SetAge(Slider slider){
         age = slider.value;
-        SetBlendShape(BlendShape.AGE, 100 - age);
+        //SetBlendShape(BlendShape.AGE, 100 - age);
     }
 
     public void SetHeight(Slider slider){
@@ -144,6 +144,17 @@ public class ModelRenderers : MonoBehaviour {
         SetFat(fat);
         height = float.Parse(blendShapesData["HEIGHT"].ToString());
         SetHeight(height);
+    }
+
+    public void GetAgeAndGender(ref int a, ref int g)
+    {
+        if (age == 0) {
+            a = 20;
+            Debug.Log("age arent setted. we understand that the base age is 20");
+        }
+        else a = (int)age;
+        g = gender;
+        Debug.Log("gender of the person is: " + gender);
     }
 
     public void SetOutlineColor(Color pOutlineColor){
