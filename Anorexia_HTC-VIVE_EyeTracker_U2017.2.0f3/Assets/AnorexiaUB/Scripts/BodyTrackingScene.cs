@@ -11,6 +11,7 @@ public class BodyTrackingScene : MainScene {
     public GameObject mirror;
     public Text statistics;
     public Slider weightSlider;
+    public RawImage patientView;
     private float _fadeDuration = 2f;
     private bool faded = false;
     private float counter = 0;
