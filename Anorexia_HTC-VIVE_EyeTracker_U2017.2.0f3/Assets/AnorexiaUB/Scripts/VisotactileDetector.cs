@@ -9,7 +9,7 @@ public class VisotactileDetector : MonoBehaviour {
     int touchingZones = 0;
     public Vector3 initSpherePos = Vector3.zero;
     //public Vector3 desiredPos = Vector3.zero;
-    public float factor = 0.05f;
+    public float factor = 0.1f;
 
     private SteamVR_Controller.Device Controller
     {
@@ -47,25 +47,26 @@ public class VisotactileDetector : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        
+        Debug.Log("adding new touching zone " + other.transform.tag);
         touchingZones++;
         //this.transform.localPosition = other.transform.position;
         inZone = true;
-        Debug.Log("starting collision " + inZone);
+        //Debug.Log("starting collision " + inZone);
     }
 
     void OnCollisionExit(Collision other)
     {
 
-        Debug.Log("ending collision " + inZone + touchingZones + " tag " + other.gameObject.tag);
+        Debug.Log("ending collision, collision event. in zone is: " + inZone + " number of touching zones are " + touchingZones + " tag " + other.gameObject.tag);
         touchingZones--;
 
         if (touchingZones <=0)
         {
+            inZone = false;
+            Debug.Log("ending to touching zones");
             //desiredPos = initSpherePos;
             this.GetComponent<Rigidbody>().velocity = Vector3.zero;
             //this.GetComponent<HingeJoint>().constantForce
-            inZone = false;
         }
         //this.transform.localPosition = initSpherePos;
     }
