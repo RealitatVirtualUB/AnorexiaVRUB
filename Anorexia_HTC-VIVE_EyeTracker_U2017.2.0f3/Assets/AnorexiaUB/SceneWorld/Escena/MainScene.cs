@@ -90,7 +90,7 @@ public class MainScene : MonoBehaviour {
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
 
     public void ChargeDebreafingScene()

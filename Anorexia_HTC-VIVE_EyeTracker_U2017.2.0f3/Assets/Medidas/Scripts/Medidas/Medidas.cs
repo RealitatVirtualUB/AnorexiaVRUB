@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Xml;
@@ -206,7 +207,11 @@ public class Medidas : MonoBehaviour {
         //string fileName = subjectIdField.text + ".txt";
         string fileName = InGameData.PacientId +".txt";
 #else
-        string fileName = "model.txt";
+        //string fileName = "model.txt";
+        string filePath = Application.dataPath + "/Pictures/";
+        //change id of the avatar
+        //string fileName = subjectIdField.text + ".txt";
+        string fileName = InGameData.PacientId +".txt";
 #endif
         StreamWriter sw = File.CreateText(filePath + fileName);
         sw.Write("{0}", Json.Serialize(data));

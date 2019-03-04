@@ -105,7 +105,7 @@ public class ChargeMenu : MonoBehaviour {
             //Debug.Log(  "pacient id: "+InGameData.PacientId+
             //            " imc incremented desired: "+ InGameData.ImcIncrement+
             //            " session selected: "+InGameData.Sn);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         else Debug.Log("invalid value");
     }
@@ -117,7 +117,7 @@ public class ChargeMenu : MonoBehaviour {
             InGameData.PacientId = pacientID;
             InGameData.IsClinic = clinicPacient;
             Debug.Log("new pacient created. pacient id: " + InGameData.PacientId + " isclinic ? "+ InGameData.IsClinic);
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         else Debug.Log("incorrect Id");
     }
