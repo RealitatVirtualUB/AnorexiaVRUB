@@ -92,5 +92,10 @@ public class MainScene : MonoBehaviour {
     {
         SceneManager.LoadScene(2);
     }
+
+    public void ChargeDebreafingScene()
+    {
+        SceneManager.LoadScene(3);
+    }
     
 }
