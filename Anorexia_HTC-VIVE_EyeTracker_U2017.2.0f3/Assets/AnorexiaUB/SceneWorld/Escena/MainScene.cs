@@ -97,5 +97,10 @@ public class MainScene : MonoBehaviour {
     {
         SceneManager.LoadScene(3);
     }
-    
+
+    public void ChargeAmputationScene()
+    {
+        SceneManager.LoadScene(4);
+    }
+
 }
