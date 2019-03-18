@@ -4,7 +4,7 @@ SpeedTreeImporter:
   externalObjects: {}
   serializedVersion: 4
   mainColor: {r: 1, g: 1, b: 1, a: 1}
-  hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+  hueVariation: {r: 0.8773585, g: 0.6999348, b: 0.13656996, a: 0.1}
   alphaTestRef: 0.33
   bestWindQuality: 4
   hasBillboard: 1
