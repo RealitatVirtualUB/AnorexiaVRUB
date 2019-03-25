@@ -8,7 +8,8 @@
 Shader "Custom/ColorInterestShader"{
 	Properties
 	{
-		_Pos("WorldPos", vector) = (0.0, 0.0, 0.0, 0.0)
+		_Pos("WorldPos_01", vector) = (0.0, 0.0, 0.0, 0.0)
+		_Pos2("WorldPos_02", vector) = (0.0, 0.0, 0.0, 0.0)
 		_Dist("Distance", float) = 5.0
 		_SpecMap("specularMap", 2D) = "white" {}
 		_Tint("Tint", Color) = (1.0,1.0,1.0,1.0)
@@ -76,6 +77,7 @@ Shader "Custom/ColorInterestShader"{
 			}
 
 			float4 _Pos;
+			float4 _Pos2;
 			sampler2D _MainTex;
 			sampler2D _BumpMap;
 			sampler2D _SpecMap;
@@ -139,16 +141,19 @@ Shader "Custom/ColorInterestShader"{
 				//c.a = 1.0;
 				//c *= i.diff;
 				// Depending the distance from the player, we use a different texture
-				if (distance(_Pos.xyz, i.worldPos.xyz) > _Dist)
-					return c;
-				else {
+				if (distance(_Pos.xyz, i.worldPos.xyz) <= _Dist) {
 					float4 finalColor = _AfectionColor;
-					finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos.xyz, i.worldPos.xyz)/_Dist);
+					finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos.xyz, i.worldPos.xyz) / _Dist);
 					c += finalColor;
-					//c.a += finalColor.a;
-					return c;
+					c.a += finalColor.a;
 				}
-				//return c;
+				if (distance(_Pos2.xyz, i.worldPos.xyz) <= _Dist) {
+					float4 finalColor = _AfectionColor;
+					finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos2.xyz, i.worldPos.xyz)/_Dist);
+					c += finalColor;
+					c.a += finalColor.a;
+				}
+				return c;
 			}
 
 			ENDCG
@@ -207,6 +212,7 @@ Shader "Custom/ColorInterestShader"{
 			}
 
 			float4 _Pos;
+			float4 _Pos2;
 			sampler2D _MainTex;
 			sampler2D _BumpMap;
 			sampler2D _SpecMap;
@@ -269,15 +275,28 @@ Shader "Custom/ColorInterestShader"{
 			
 				//c *= i.diff;
 				// Depending the distance from the player, we use a different texture
-				if (distance(_Pos.xyz, i.worldPos.xyz) > _Dist)
-					return c;
-				else {
+				if (distance(_Pos.xyz, i.worldPos.xyz) <= _Dist) {
 					float4 finalColor = _AfectionColor;
 					finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos.xyz, i.worldPos.xyz) / _Dist);
 					c += finalColor;
-					//c.a += finalColor.a;
-					return c;
+					c.a += finalColor.a;
 				}
+				if (distance(_Pos2.xyz, i.worldPos.xyz) <= _Dist) {
+					float4 finalColor = _AfectionColor;
+					finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos2.xyz, i.worldPos.xyz) / _Dist);
+					c += finalColor;
+					c.a += finalColor.a;
+				}
+				return c;
+				//if (distance(_Pos.xyz, i.worldPos.xyz) > _Dist)
+				//	return c;
+				//else {
+				//	float4 finalColor = _AfectionColor;
+				//	finalColor.rgb = lerp(finalColor, (0, 0, 0), distance(_Pos.xyz, i.worldPos.xyz) / _Dist);
+				//	c += finalColor;
+				//	//c.a += finalColor.a;
+				//	return c;
+				//}
 			}
 
 			ENDCG

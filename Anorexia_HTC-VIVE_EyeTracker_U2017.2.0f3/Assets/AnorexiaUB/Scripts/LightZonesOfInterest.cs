@@ -33,6 +33,8 @@ public class LightZonesOfInterest : MonoBehaviour {
     public float parseDuration = 20;
 
     int currentInterestZone = 0;
+    List<int> currentInterestZones = new List<int>();
+    
 
     private float currentSliderValue = 0;
     private float objectiveSliderValue = 0;
@@ -43,18 +45,21 @@ public class LightZonesOfInterest : MonoBehaviour {
     float currentMaxIntensity = 0;
     float currentMinIntensity = 0;
     
+
     //private float desiredIntensity = 0;
     //private bool parseIntensity = false;
 
 	// Use this for initialization
 	void Start() {
-        ChangeAffectionZone(11);
+        //ChangeAffectionZone(11);
+        AddAffectionZone(11);
         SetIntensity();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        ChangeWorldPosMaterial();
+        //ChangeWorldPosMaterial();
+        ChangeMultipleWorldPosMaterials();
         if (parseZOI)
         {
             currentSliderValue += interval;
@@ -94,6 +99,49 @@ public class LightZonesOfInterest : MonoBehaviour {
         
     }
 
+    public void AddAffectionZone(int id)
+    {
+        if (zonesOfinterest != null)
+        {
+            currentInterestZone = id;
+            if (id == (int)interestId.NONE)
+            {
+                currentInterestZones.Clear();
+                foreach (InterestZone zone in zonesOfinterest) connectedButtons[(int)zone.zoneID].GetComponent<Image>().color = disabledColor;
+            }
+            else if(currentInterestZones.Count == 2 || currentInterestZones.Count == 0)
+            {
+                currentInterestZones.Clear();
+                foreach (InterestZone zone in zonesOfinterest) connectedButtons[(int)zone.zoneID].GetComponent<Image>().color = disabledColor;
+                currentInterestZones.Add(id);
+                currentIntensity = zonesOfinterest[id].maxIntensityOfInterest;
+                SetIntensity();
+            }else{
+                currentInterestZones.Add(id);
+                currentIntensity = zonesOfinterest[id].maxIntensityOfInterest;
+                SetIntensity();
+            }
+            connectedButtons[id].GetComponent<Image>().color = enabledColor;
+            //{
+            //    if ((int)zone.zoneID == id)
+            //    {
+            //        connectedButtons[i].GetComponent<Image>().color = disabledColor;
+            //        currentInterestZone = id;
+            //        currentIntensity = zone.maxIntensityOfInterest;
+            //        i++;
+            //    }
+            //    else
+            //    {
+            //        connectedButtons[i].GetComponent<Image>().color = enabledColor;
+            //        i++;
+            //    }
+            //}
+            //SetIntensity();
+        }
+        else Debug.Log("doesn't exist anyone zone of interest");
+
+    }
+
     private void SetIntensity()
     {
         SetCurrentMaxMinIntensity();
@@ -130,6 +178,32 @@ public class LightZonesOfInterest : MonoBehaviour {
             //Vector3 newpos =zonesOfinterest[currentInterestZone].positionZone.InverseTransformPoint(zonesOfinterest[currentInterestZone].positionZone.position);
             if (zonesOfinterest[currentInterestZone].positionZone != null)newpos = zonesOfinterest[currentInterestZone].positionZone.position;
             m.SetVector("_Pos", newpos);
+            m.SetFloat("_Dist", currentIntensity);
+        }
+    }
+
+    private void ChangeMultipleWorldPosMaterials()
+    {
+        int activatedNumber = 0;
+        Vector3 newpos = Vector3.zero;
+        Vector3 newPos2 = Vector3.zero;
+        foreach (int id in currentInterestZones)
+        {
+            activatedNumber++;
+            if(activatedNumber == 1)
+            {
+                if (zonesOfinterest[id].positionZone != null) newpos = zonesOfinterest[id].positionZone.position;
+            }
+            else if(activatedNumber == 2)
+            {
+                if (zonesOfinterest[id].positionZone != null) newPos2 = zonesOfinterest[id].positionZone.position;
+            }
+            else Debug.Log("i have to much ZOIs");
+        }
+        foreach (Material m in bodyMaterials)
+        {
+            m.SetVector("_Pos", newpos);
+            m.SetVector("_Pos2", newPos2);
             m.SetFloat("_Dist", currentIntensity);
         }
     }
