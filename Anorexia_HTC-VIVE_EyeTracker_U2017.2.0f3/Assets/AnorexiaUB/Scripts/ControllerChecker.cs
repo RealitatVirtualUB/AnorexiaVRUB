@@ -66,6 +66,7 @@ public class ControllerChecker : MonoBehaviour {
         if (Controller.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             qc.EndQuestion();
+            //add data
             Debug.Log("trigger down");
         }
         //up
@@ -84,7 +85,7 @@ public class ControllerChecker : MonoBehaviour {
         {
             //Debug.Log("Touchpad down");
             parseValues = true;
-            Debug.Log("touchpad touch detected");
+            //Debug.Log("touchpad touch detected");
         }
         //up
         if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))

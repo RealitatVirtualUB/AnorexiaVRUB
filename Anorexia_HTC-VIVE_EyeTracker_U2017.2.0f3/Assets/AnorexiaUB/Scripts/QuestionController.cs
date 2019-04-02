@@ -12,7 +12,6 @@ public class QuestionController : MonoBehaviour {
     public float timeBtwQuestions = 60.0f;
     public GameObject automataMenu;
     public GameObject controlMenu;
-
     private float timer;
     private bool questionActivated = false;
     private int questionCounter = 0;
@@ -57,6 +56,7 @@ public class QuestionController : MonoBehaviour {
     public void EndQuestion()
     {
         //this.GetComponent<LightZonesOfInterest>().ChangeIntensitySlider(questionPanel.GetComponent<QuestionPanel>().stressBar.value/100);
+        this.GetComponent<CsvReadWrite>().AddData(questionPanel.GetComponent<QuestionPanel>().stressBar.value);
         this.GetComponent<LightZonesOfInterest>().ChangeObjectiveIntensity(questionPanel.GetComponent<QuestionPanel>().stressBar.value / 100);
         questionPanel.SetActive(false);
         questionActivated = false;

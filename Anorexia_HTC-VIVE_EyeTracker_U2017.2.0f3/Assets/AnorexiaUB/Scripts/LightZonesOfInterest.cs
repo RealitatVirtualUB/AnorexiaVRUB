@@ -85,6 +85,8 @@ public class LightZonesOfInterest : MonoBehaviour {
                     connectedButtons[i].GetComponent<Image>().color = disabledColor;
                     currentInterestZone = id;
                     currentIntensity = zone.maxIntensityOfInterest;
+                    this.GetComponent<CsvReadWrite>().SetupBodyPartData(id.ToString() + " body part id");
+                    Debug.Log("setting body part");
                     i++;
                 }
                 else

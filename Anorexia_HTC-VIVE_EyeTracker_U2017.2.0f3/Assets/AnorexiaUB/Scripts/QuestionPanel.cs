@@ -34,6 +34,6 @@ public class QuestionPanel : MonoBehaviour {
     {
         if (v > 0) stressBar.value += updateValue;
         else stressBar.value -= updateValue;
-        Debug.Log("moving intensity slider");
+        //Debug.Log("moving intensity slider");
     }
 }
