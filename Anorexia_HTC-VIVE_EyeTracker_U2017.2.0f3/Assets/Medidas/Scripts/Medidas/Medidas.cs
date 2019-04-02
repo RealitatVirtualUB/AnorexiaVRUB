@@ -200,15 +200,21 @@ public class Medidas : MonoBehaviour {
         //model.SerializeModelData();
         //modelData = imcCalculator.SerializeData();
 
-//set save avatar
+        //set save avatar
 #if UNITY_EDITOR
-        string filePath = Application.dataPath + "/Pictures/";
+        //string filePath = Application.persistentDataPath + "/Pictures/";
+        //if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath); // returns a DirectoryInfo object
+        string filePath = System.IO.Directory.GetCurrentDirectory() + "/Pictures/";
+        if(!Directory.Exists(filePath)) Directory.CreateDirectory(filePath); // returns a DirectoryInfo object
+        Debug.Log(filePath);
         //change id of the avatar
         //string fileName = subjectIdField.text + ".txt";
         string fileName = InGameData.PacientId +".txt";
 #else
         //string fileName = "model.txt";
-        string filePath = Application.dataPath + "/Pictures/";
+        //string filePath = Application.persistentDataPath + "/Pictures/";
+        string filePath = System.IO.Directory.GetCurrentDirectory() + "/Pictures/";
+        if (!Directory.Exists(filePath))Directory.CreateDirectory(filePath); // returns a DirectoryInfo object
         //change id of the avatar
         //string fileName = subjectIdField.text + ".txt";
         string fileName = InGameData.PacientId +".txt";
@@ -219,8 +225,10 @@ public class Medidas : MonoBehaviour {
     }   
 
     public void LoadAvatar(){
-        string filePath = Application.dataPath + "/Pictures/";
+        //string filePath = Application.persistentDataPath + "/Pictures/";
+        string filePath = System.IO.Directory.GetCurrentDirectory() + "/Pictures/";
         string fileName = subjectIdField.text + ".txt";
+        Debug.Log(filePath + fileName);
         if (File.Exists(filePath + fileName)){
             string text = File.ReadAllText(filePath + fileName);
             Dictionary<string, object> data = (Dictionary<string, object>)Json.Deserialize(text);
@@ -230,7 +238,6 @@ public class Medidas : MonoBehaviour {
             imcCalculator.LoadData(float.Parse("" + imcData["weight"]), float.Parse("" + imcData["height"]), float.Parse("" + imcData["imc"]));
             Dictionary<string, object> blendShapesData = (Dictionary<string, object>)data["blendShapesData"];
             model.avatarComponents.DeserializeData(blendShapesData);
-
         }
     }
 

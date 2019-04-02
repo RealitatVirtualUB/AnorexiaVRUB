@@ -27,7 +27,8 @@ public class AvatarLoader : MonoBehaviour
     }
 
     public void LoadAvatar(string id =""){
-        string filePath = Application.dataPath + "/Pictures/";
+        //string filePath = Application.dataPath + "/Pictures/";
+        string filePath = System.IO.Directory.GetCurrentDirectory() + "/Pictures/";
         string fileName = "";
         //check if the id is valid and if is pased as parameter by input field or by ingamedata
         if (id != "")
