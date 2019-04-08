@@ -61,7 +61,7 @@ public class ChargeMenu : MonoBehaviour {
         if (int.TryParse(newId.text, out i))
         {
             pacientID = newId.text;
-            Debug.Log("id is valid: " + i);
+            //Debug.Log("id is valid: " + i);
         }
 
         else Debug.Log("invalid id. try to put other");
@@ -69,7 +69,7 @@ public class ChargeMenu : MonoBehaviour {
 
     public void UpdateIMCincrement(Text newiIMC)
     {
-        if (float.TryParse(newiIMC.text, out imcIncrement)) Debug.Log("new increment setted : " + imcIncrement);
+        if (float.TryParse(newiIMC.text, out imcIncrement))Debug.Log("new increment setted : " + imcIncrement);
         else Debug.Log("error to set new imc increment");
     }
 

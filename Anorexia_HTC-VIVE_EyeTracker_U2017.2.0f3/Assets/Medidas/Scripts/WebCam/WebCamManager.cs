@@ -30,7 +30,7 @@ public class WebCamManager : MonoBehaviour {
         _initialFrontPhotoScale = frontPhoto.transform.localScale;
         _initialSidePhotoScale = sidePhoto.transform.localScale;
         _currentPhoto = frontPhoto;
-        filePath = Application.dataPath + "/Pictures/";
+        filePath = System.IO.Directory.GetCurrentDirectory() + "/Pictures/";
         fileName = _camView.ToString();
         extension = ".png";
         ViewState.VIEW = _camView;
