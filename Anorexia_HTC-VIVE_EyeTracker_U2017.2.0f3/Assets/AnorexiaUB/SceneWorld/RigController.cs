@@ -89,7 +89,7 @@ public class RigController : MonoBehaviour
         position.x = this.headCamera.position.x;
         position.z = this.headCamera.position.z;
         this.pivote.transform.position = position;
-        Vector3 distanceVector = this.headCamera.position - this.upperBone.position;
+        //Vector3 distanceVector = this.headCamera.position - this.upperBone.position;
         float scale = this.headCamera.position.y / this.upperBone.position.y;
         this.mirrorController.transform.localScale = scale * Vector3.one;
         this.transform.localScale = scale * Vector3.one;

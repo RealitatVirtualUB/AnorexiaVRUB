@@ -1,7 +1,7 @@
 ﻿//========= Copyright 2016-2017, HTC Corporation. All rights reserved. ===========
 
 #if UNITY_EDITOR
-using UnityEditor;
+//using UnityEditor;
 #endif
 using UnityEngine;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace HTC.UnityPlugin.StereoRendering
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Renderer))]
     public class StereoRenderer : MonoBehaviour
@@ -241,27 +241,27 @@ namespace HTC.UnityPlugin.StereoRendering
         }
 
 #if UNITY_EDITOR
-        private void Reset()
-        {
-            // try to inject layer
-            LayerInjection(ignoreLayerName);
+        //private void Reset()
+        //{
+        //    // try to inject layer
+        //    LayerInjection(ignoreLayerName);
 
-            // initialize canvas origin using mesh transform
-            canvasOrigin = transform;
-            canvasOriginPos = transform.position;
-            canvasOriginEuler = transform.eulerAngles;
+        //    // initialize canvas origin using mesh transform
+        //    canvasOrigin = transform;
+        //    canvasOriginPos = transform.position;
+        //    canvasOriginEuler = transform.eulerAngles;
 
-            if (stereoCameraHead == null)
-                CreateStereoCameraRig();
+        //    if (stereoCameraHead == null)
+        //        CreateStereoCameraRig();
 
-            // if only one material, substitute it with stereo render material
-            Renderer renderer = GetComponent<Renderer>();
-            Material[] materials = renderer.sharedMaterials;
-            if (materials.Length == 1)
-            {
-                renderer.sharedMaterial = (Material)Resources.Load("StereoRenderMaterial", typeof(Material));
-            }
-        }
+        //    // if only one material, substitute it with stereo render material
+        //    Renderer renderer = GetComponent<Renderer>();
+        //    Material[] materials = renderer.sharedMaterials;
+        //    if (materials.Length == 1)
+        //    {
+        //        renderer.sharedMaterial = (Material)Resources.Load("StereoRenderMaterial", typeof(Material));
+        //    }
+        //}
 #endif
 
         private void OnDestroy()
@@ -359,10 +359,10 @@ namespace HTC.UnityPlugin.StereoRendering
             }
             
             #if UNITY_EDITOR
-            if(IsEditing() && LayerMask.NameToLayer(ignoreLayerName) == -1)
-            {
-                LayerInjection(ignoreLayerName);
-            }
+            //if(IsEditing() && LayerMask.NameToLayer(ignoreLayerName) == -1)
+            //{
+            //    LayerInjection(ignoreLayerName);
+            //}
             #endif
         }
 
@@ -739,57 +739,57 @@ namespace HTC.UnityPlugin.StereoRendering
         }
 
 #if UNITY_EDITOR
-        private bool LayerInjection(string layerName)
-        {
-            SerializedObject tagManager = 
-                new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
-            SerializedProperty layers = tagManager.FindProperty("layers");
+        //private bool LayerInjection(string layerName)
+        //{
+        //    SerializedObject tagManager = 
+        //        new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+        //    SerializedProperty layers = tagManager.FindProperty("layers");
 
-            // test whether the target layer already existed
-            // Note: Unity default layer already occupied layer id 0-7
-            bool layerExisting = false;
-            for (int i = 8; i < layers.arraySize; i++) 
-            {
-                SerializedProperty sp = layers.GetArrayElementAtIndex(i);
+        //    // test whether the target layer already existed
+        //    // Note: Unity default layer already occupied layer id 0-7
+        //    bool layerExisting = false;
+        //    for (int i = 8; i < layers.arraySize; i++) 
+        //    {
+        //        SerializedProperty sp = layers.GetArrayElementAtIndex(i);
 
-                //print(layerSP.stringValue);
-                if (sp.stringValue == layerName)
-                {
-                    layerExisting = true;
-                    break;
-                }
-            }
+        //        //print(layerSP.stringValue);
+        //        if (sp.stringValue == layerName)
+        //        {
+        //            layerExisting = true;
+        //            break;
+        //        }
+        //    }
 
-            // if layer not existing, inject to first open layer slot
-            if (!layerExisting)
-            {
-                SerializedProperty slot = null;
-                for (int i = 8; i <= 31; i++)
-                {
-                    SerializedProperty sp = layers.GetArrayElementAtIndex(i);
-                    if (sp != null && string.IsNullOrEmpty(sp.stringValue))
-                    {
-                        slot = sp;
-                        break;
-                    }
-                }
+        //    // if layer not existing, inject to first open layer slot
+        //    if (!layerExisting)
+        //    {
+        //        SerializedProperty slot = null;
+        //        for (int i = 8; i <= 31; i++)
+        //        {
+        //            SerializedProperty sp = layers.GetArrayElementAtIndex(i);
+        //            if (sp != null && string.IsNullOrEmpty(sp.stringValue))
+        //            {
+        //                slot = sp;
+        //                break;
+        //            }
+        //        }
 
-                if (slot != null)
-                {
-                    slot.stringValue = layerName;
-                    layerExisting = true;
-                }
-                else
-                {
-                    Debug.LogError("Could not find an open Layer Slot for: " + layerName);
-                }
-            }
+        //        if (slot != null)
+        //        {
+        //            slot.stringValue = layerName;
+        //            layerExisting = true;
+        //        }
+        //        else
+        //        {
+        //            Debug.LogError("Could not find an open Layer Slot for: " + layerName);
+        //        }
+        //    }
 
-            // save
-            tagManager.ApplyModifiedProperties();
+        //    // save
+        //    tagManager.ApplyModifiedProperties();
 
-            return layerExisting;
-        }
+        //    return layerExisting;
+        //}
 #endif
     }
 }

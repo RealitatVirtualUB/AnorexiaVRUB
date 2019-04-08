@@ -62,15 +62,15 @@ public class Room : MonoBehaviour {
         Quaternion rcr = this.side ? this.r_Controller.rotation : this.l_Controller.rotation;
         Quaternion lcr = this.side ? this.l_Controller.rotation : this.r_Controller.rotation;
 
-        float seconds = 0f;//
-        try
-        {
-            seconds = float.Parse(this.delayField.text);
-        }
-        catch (System.Exception e)
-        {
+        //float seconds = 0f;//
+        //try
+        //{
+        //    seconds = float.Parse(this.delayField.text);
+        //}
+        //catch (System.Exception e)
+        //{
 
-        }
+        //}
 
 
         this.StartCoroutine(this.moveDelayed(this.cameraHead.transform.position, rcp, lcp, this.cameraHead.transform.rotation, rcr, lcr));

@@ -47,7 +47,7 @@ public class MimicController : MonoBehaviour {
         this.transform.position = position;
         this.model.rotation = rotation;
 
-        Vector3 distanceVector = -this.transform.up;
+        //Vector3 distanceVector = -this.transform.up;
         this.modelParent.localPosition = this.factor * this.modelParent.up * this.shapesSlider.value / 100f;
     }
 }

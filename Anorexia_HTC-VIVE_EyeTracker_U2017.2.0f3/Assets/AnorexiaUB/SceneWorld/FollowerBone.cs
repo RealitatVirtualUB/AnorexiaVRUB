@@ -18,7 +18,7 @@ public class FollowerBone : MonoBehaviour {
 	void Update () {
         if (this.trackPosition)
         {
-            Vector3 delta = this.followed.localPosition - this.lastLocalPosition;
+            //Vector3 delta = this.followed.localPosition - this.lastLocalPosition;
             this.lastLocalPosition = this.followed.localPosition;
             this.transform.localPosition = this.followed.localPosition;//+= delta;
         }
