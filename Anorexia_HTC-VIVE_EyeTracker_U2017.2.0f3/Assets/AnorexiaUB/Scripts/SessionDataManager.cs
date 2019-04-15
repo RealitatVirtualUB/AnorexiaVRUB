@@ -11,7 +11,7 @@ public class SessionDataManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        CreateExel();
+        //CreateExel();
     }
 	
 	// Update is called once per frame
